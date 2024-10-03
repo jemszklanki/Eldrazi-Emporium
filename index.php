@@ -35,10 +35,20 @@ session_start();
                 <li class="nav-item nav-links">
                     <a class="nav-link" href="register.php">Rejestracja</a>
                 </li>
+                <!-- logut -->
+                <li>
+                <?php
+                if(isset($_SESSION['user_id'])){
+                    echo '<a class="nav-link" href="logout.php">Logout</a> </li>';
+                    echo  '<li><span class="nav-link witaj">Witaj '.$_SESSION['username'].'</span></li>';
+                }
+                ?>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
 
 <!-- Gł. sekcja -->
 <main class="container mt-4">
