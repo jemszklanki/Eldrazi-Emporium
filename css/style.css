@@ -1,0 +1,14 @@
+body {
+    background-color: #f8f9fa;
+}
+.banner {
+    background-color: #e9ecef;
+    padding: 50px 0;
+    text-align: center;
+}
+.card {
+    margin: 20px 0;
+}
+.nav-links {
+    margin-right: 15px;
+}
