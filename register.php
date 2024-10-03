@@ -55,6 +55,12 @@ $conn->close();
 </head>
 <body>
 
+<!-- Baner -->
+<header class="banner">
+    <h1>Witamy w Eldrazi Emporium</h1>
+    <p>Twój one-stop shop dla kart MTG!</p>
+</header>
+
 <div class="form-container">
     <h2 class="text-center">Rejestracja</h2>
     <?php if ($error_msg): ?>
