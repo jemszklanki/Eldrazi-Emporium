@@ -24,7 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Wsadź dane do sesji
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-
+            if ($user['admin'] == true){
+                $_SESSION['admin'] = $user['admin'];
+            }
             // Przekieruj na index po zalogowaniu
             header("Location: index.php");
             exit();
