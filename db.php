@@ -1,9 +1,9 @@
 <?php
 // Baza danych
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "emporium";
+$servername = "mysql.ct8.pl";
+$username = "m50637_root";
+$password = "S7!1277//P455W0:*qkl5";
+$dbname = "m50637_emporium";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
