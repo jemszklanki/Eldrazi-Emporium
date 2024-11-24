@@ -1,10 +1,7 @@
 <?php
-// Start sesji
-session_start();
-
 require_once("db.php");
-
-//  echo "TODO: Działający login :p";
+require_once("header.php");
+require_once("navbar.php");
 
 $error_msg = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -42,22 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Emporium</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<!-- Baner -->
-<header class="banner">
-    <h1>Witamy w Eldrazi Emporium</h1>
-    <p>Twój one-stop shop dla kart MTG!</p>
-</header>
 
 <div class="form-container">
     <h2 class="text-center">Login</h2>
@@ -75,8 +56,6 @@ $conn->close();
     <p class="text-center mt-3">Nie masz konta? Luźna guma! <a href="register.php">Zarejestruj się tutaj</a></p>
 </div>
 
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-</body>
-</html>
+<?php 
+    require_once("footer.php");
+?>
