@@ -9,8 +9,15 @@ if(isset($_SESSION['admin'])){
 }
 ?>
 
-<p>Chuj dupa kurwa cipa</p>
-
+<main class="container mt-4">
+    <button id="users" onclick="getForm(1)">Karty</button>
+    <button id="cards" onclick="getForm(2)">Dodatki</button>
+    <button id="expansions" onclick="getForm(3)">Użytkownicy</button>
+    <div id="ajax-ret">
+        <!-- Tutaj ajax ze skryptu -->
+    </div>
+</main>
+<script src="js/admin_panel.js"></script>
 <?php 
     require_once("footer.php");
 ?>
