@@ -4,6 +4,26 @@ session_start();
 
 require_once("db.php");
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
+function sendemail_verify($username,$email,$token)
+{
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'u20_ernestkosieradzki@zsp1.siedlce.pl';
+    $mail->Password   = 'nutcaizpuluaptqj';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port       = 465;
+
+
+}
+
 $error_msg = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -24,18 +44,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Hash
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+<<<<<<< Updated upstream
         
         // Wygenerowanie tokena do weryfikacji
         $token = bin2hex(random_bytes('4'));
 
+=======
+        $token = md5(rand());
+>>>>>>> Stashed changes
         // Dodaj do bazy
-        $sql = "INSERT INTO users (username, password, email, admin) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, email, admin, verified, token) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $admin = false; // Ustaw admina na nie
-        $stmt->bind_param("sssb", $username, $hashed_password, $email, $admin);
+        $verified = false;
+        $stmt->bind_param("sssb", $username, $hashed_password, $email, $admin, $verified, $token);
 
         if ($stmt->execute()) {
-            header("Location: index.php");
+            sendemail_verify("$username","$email","$token");
+            header("Location: veryfikujhehehe.hwdp");
             exit(); 
         } else {
             $error_msg = "Error: " . $stmt->error;
