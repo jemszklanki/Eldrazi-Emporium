@@ -24,6 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Hash
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Wygenerowanie tokena do weryfikacji
+        $token = bin2hex(random_bytes('4'));
 
         // Dodaj do bazy
         $sql = "INSERT INTO users (username, password, email, admin) VALUES (?, ?, ?, ?)";
