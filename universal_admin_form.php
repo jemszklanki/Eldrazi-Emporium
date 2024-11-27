@@ -5,6 +5,11 @@ if(!isset($_SESSION['admin'])){
     die;
 }else{
     require_once("db.php");
+    //  Przez to że to działa ajaxem trzeba passować ten index w ten sposób
+    //  Idk czy jest po co to unsetować w innych skryptach
+    if(isset($_GET['index'])){
+        $_SESSION['index'] = $_GET['index'];
+    }
 }
 
 /* 
@@ -29,7 +34,6 @@ Przykłady:
 if(isset($_GET["n"])){
     switch($_GET["n"]){
         case 1:
-            echo "Karty";
             require_once("panels/karty.php");
             break;
         case 2:
@@ -42,7 +46,7 @@ if(isset($_GET["n"])){
             require_once("panels/karty_add.php");
             break;
         case 12:
-            require_once("panels/karty_edit.php");
+            require_once("panels/karty_edit.php");  //  TODO sprawdzaj czy admin, passuj do tych kurew i rob kwerende - unset po tym
             break;
         case 13:
             require_once("panels/karty_del.php");

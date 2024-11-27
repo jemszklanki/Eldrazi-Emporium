@@ -8,6 +8,5 @@ if(!isset($_SESSION['admin'])){
 }
 ?>
 <p>Na pewno usunąć <?php echo $_GET['index'] ?>?</p>
-<form>
-
-</form>
+<button onclick='doQuery(13, "<?php echo $_GET['index'] ?>")'>TAK</button>
+<button onclick='getForm(1)'>NIE</button>

@@ -6,13 +6,14 @@ if(!isset($_SESSION['admin'])){
         die;
     }
 }
+    //  TODO selecty z nazwami zamiast input liczby z palca
 ?>
 
 <form method="POST" action="panels/karty_add.php">
     <label>Nazwa</label><br>
     <input type="text" name="nazwa" placeholder = "Colossal Dreadmaw" required><br>
     <label>Dodatek</label><br>
-    <input type="number" name="cena" placeholder = "Dodatek" required><br>
+    <input type="number" name="dodatek" placeholder = "Dodatek" required><br>
     <label>Stan</label><br>
     <input type="number" name="stan" placeholder = "Stan" required><br>
     <label>Foil</label><br>
@@ -30,7 +31,7 @@ if(!isset($_SESSION['admin'])){
 <?php
     if(
         isset($_POST['nazwa'])   &&
-        isset($_POST['cena'])   &&
+        isset($_POST['dodatek'])   &&
         isset($_POST['stan'])   &&
         isset($_POST['foil'])   &&
         isset($_POST['jezyk'])   &&
@@ -41,7 +42,7 @@ if(!isset($_SESSION['admin'])){
         require_once('../db.php');
         $query = mysqli_query($conn, "INSERT INTO cards VALUES (
         '{$_POST["nazwa"]}', 
-        '{$_POST["cena"]}', 
+        '{$_POST["dodatek"]}', 
         '{$_POST["stan"]}', 
         '{$_POST["foil"]}', 
         '{$_POST["jezyk"]}', 

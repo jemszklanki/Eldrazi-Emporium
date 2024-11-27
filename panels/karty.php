@@ -1,6 +1,6 @@
 <?php
     $query = mysqli_query($conn,"SELECT * FROM cards;"); 
-    
+
     echo '<table><thead>
             <tr>
                 <th>Nazwa</th>
@@ -23,8 +23,8 @@
             <td>".$wynik["notes"]."</td>
             <td>".$wynik["price"]."</td>
             <td>".$wynik["quantity"]."</td>
-            <td>EDYTUJ</td>
-            <td><button onclick='getForm(13, ".'"'.$wynik["name"].'"'.")'>USUŃ</td>
+            <td><button onclick='getForm(12, ".'"'.$wynik["name"].'"'.")'>EDYTUJ</button></td>
+            <td><button onclick='getForm(13, ".'"'.$wynik["name"].'"'.")'>USUŃ</button></td>
         </tr>"; 
     } 
     echo '</tbody></table>';
