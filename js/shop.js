@@ -11,4 +11,3 @@ function doSearch(){
     xmlhttp.open("GET", "queries/shop_filter.php?name=" + nameField.value, true);
     xmlhttp.send();
 }
-//  filtr ajaxem w tym pliku

@@ -1,6 +1,22 @@
 body {
     background-color: #f8f9fa;
 }
+table {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid darkgray;
+}
+tr {
+    border: 1px solid darkgray;
+}
+td{
+    width: 10%;
+}
+tr:nth-child(odd){
+    background-color: rgb(225, 225, 225);
+}
 .banner {
     background-color: #e9ecef;
     padding: 50px 0;
@@ -22,5 +38,9 @@ body {
 }
 .witaj {
     float: right;
+    color: black;
+}
+.banner_link{
+    text-decoration: none;
     color: black;
 }

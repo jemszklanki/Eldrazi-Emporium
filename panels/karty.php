@@ -11,6 +11,8 @@
                 <th>Notatki</th>
                 <th>Cena</th>
                 <th>Ilość</th>
+                <th>Edytuj</th>
+                <th>Usuń</th>
             </tr>
         </thead><tbody>';
     while ($wynik = @mysqli_fetch_array($query)) { 

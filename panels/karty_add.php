@@ -6,20 +6,50 @@ if(!isset($_SESSION['admin'])){
         die;
     }
 }
-    //  TODO selecty z nazwami zamiast input liczby z palca
+if(!isset($conn)){
+    require_once('../db.php');
+}
 ?>
 
 <form method="POST" action="panels/karty_add.php">
     <label>Nazwa</label><br>
     <input type="text" name="nazwa" placeholder = "Colossal Dreadmaw" required><br>
     <label>Dodatek</label><br>
-    <input type="number" name="dodatek" placeholder = "Dodatek" required><br>
+    <select name="dodatek" required>
+        <?php
+            $query = mysqli_query($conn,"SELECT * FROM expansions;"); 
+            while ($wynik = @mysqli_fetch_array($query)) {
+                echo "<option value='{$wynik["id"]}'>{$wynik["expansion_name"]}</option>";
+            }
+        ?>
+    </select><br>
     <label>Stan</label><br>
-    <input type="number" name="stan" placeholder = "Stan" required><br>
+    <select name="stan" required>
+        <?php
+            $query = mysqli_query($conn,"SELECT * FROM conditions;"); 
+            while ($wynik = @mysqli_fetch_array($query)) {
+                echo "<option value='{$wynik["id"]}'>{$wynik["condition_name"]}</option>";
+            }
+        ?>
+    </select><br>
     <label>Foil</label><br>
-    <input type="number" name="foil" placeholder = "Foil" required><br>
+    <select name="foil" required>
+        <?php
+            $query = mysqli_query($conn,"SELECT * FROM foils;"); 
+            while ($wynik = @mysqli_fetch_array($query)) {
+                echo "<option value='{$wynik["id"]}'>{$wynik["foil_name"]}</option>";
+            }
+        ?>
+    </select><br>
     <label>Język</label><br>
-    <input type="number" name="jezyk" placeholder = "Język" required><br>
+    <select name="jezyk" required>
+        <?php
+            $query = mysqli_query($conn,"SELECT * FROM languages;"); 
+            while ($wynik = @mysqli_fetch_array($query)) {
+                echo "<option value='{$wynik["id"]}'>{$wynik["language_name"]}</option>";
+            }
+        ?>
+    </select><br>
     <label>Notatki</label><br>
     <input type="textfield" name="notatki" placeholder = "Notatki"><br>
     <label>Cena</label><br>

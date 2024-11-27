@@ -1,8 +1,10 @@
 <!-- Baner -->
+<a href="index.php#" class='banner_link'>
 <header class="banner">
     <h1>Witamy w Eldrazi Emporium</h1>
     <p>Twój one-stop shop dla kart MTG!</p>
 </header>
+</a>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
