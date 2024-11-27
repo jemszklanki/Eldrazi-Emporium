@@ -69,7 +69,6 @@ if(!isset($conn)){
         isset($_POST['cena'])   &&
         isset($_POST['ilosc'])
     ){
-        require_once('../db.php');
         $query = mysqli_query($conn, "INSERT INTO cards VALUES (
         '{$_POST["nazwa"]}', 
         '{$_POST["dodatek"]}', 

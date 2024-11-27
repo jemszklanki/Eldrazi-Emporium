@@ -32,6 +32,9 @@ if(isset($_GET["n"])){
         case 13:
             require_once("queries/karty_del_query.php");
             break;
+        case 23:
+                require_once("queries/dodatki_del_query.php");
+                break;
         default:
             die;
     }
