@@ -11,10 +11,10 @@ if(!isset($conn)){
 }
 ?>
 <p>Na pewno usunąć <?php 
-    $query = mysqli_query($conn,"SELECT expansion_name FROM expansions WHERE id={$_GET['index']}");
+    $query = mysqli_query($conn,"SELECT username FROM users WHERE id={$_GET['index']}");
     while ($wynik = @mysqli_fetch_array($query)) {
-        echo $wynik['expansion_name'];
-    }
+        echo $wynik['username'];
+    } 
 ?>?</p>
-<button onclick='doQuery(23, "<?php echo $_GET['index'] ?>")'>TAK</button>
-<button onclick='getForm(1)'>NIE</button>
+<button onclick='doQuery(33, "<?php echo $_GET['index'] ?>")'>TAK</button>
+<button onclick='getForm(3)'>NIE</button>

@@ -40,7 +40,7 @@ if(isset($_GET["n"])){
             require_once("panels/dodatki.php");
             break;
         case 3:
-            echo "Użytkownicy";
+            require_once("panels/uzytkownicy.php");
             break;
         case 11:
             require_once("panels/karty_add.php");
@@ -55,10 +55,19 @@ if(isset($_GET["n"])){
             require_once("panels/dodatki_add.php");
             break;
         case 22:
-            require_once("panels/dodatki_edit.php");  //  TODO sprawdzaj czy admin, passuj do tych kurew i rob kwerende - unset po tym
+            require_once("panels/dodatki_edit.php");  
             break;
         case 23:
             require_once("panels/dodatki_del.php");
+            break;
+        case 31:
+            require_once("panels/uzytkownicy_add.php");
+            break;
+        case 32:
+            require_once("panels/uzytkownicy_edit.php");  
+            break;
+        case 33:
+            require_once("panels/uzytkownicy_del.php");
             break;
         default:
             header("Location: index.php");

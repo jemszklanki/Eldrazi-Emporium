@@ -12,7 +12,7 @@ if(!isset($conn)){
 ?>
 <form method="POST" action="panels/dodatki_add.php">
     <label>Nazwa</label><br>
-    <input type="text" name="nazwa" placeholder = "Colossal Dreadmaw" required><br>
+    <input type="text" name="nazwa" placeholder = "MH4" required><br>
     <input type="submit"><br>
 </form>
 

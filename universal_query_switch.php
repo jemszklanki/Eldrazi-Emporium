@@ -6,7 +6,6 @@ if(!isset($_SESSION['admin'])){
 }else{
     require_once("db.php");
     //  Przez to że to działa ajaxem trzeba passować ten index w ten sposób
-    //  Idk czy jest po co to unsetować w innych skryptach
     if(isset($_GET['index'])){
         $_SESSION['index'] = $_GET['index'];
     }
@@ -33,8 +32,11 @@ if(isset($_GET["n"])){
             require_once("queries/karty_del_query.php");
             break;
         case 23:
-                require_once("queries/dodatki_del_query.php");
-                break;
+            require_once("queries/dodatki_del_query.php");
+            break;
+        case 33:
+            require_once("queries/uzytkownicy_del_query.php");
+            break;    
         default:
             die;
     }
