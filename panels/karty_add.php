@@ -53,9 +53,9 @@ if(!isset($conn)){
     <label>Notatki</label><br>
     <input type="textfield" name="notatki" placeholder = "Notatki"><br>
     <label>Cena</label><br>
-    <input type="number" name="cena" placeholder = "Cena" required><br>
+    <input type="number" name="cena" placeholder = "Cena" step="0.01" value="1" required><br>
     <label>Ilość</label><br>
-    <input type="number" name="ilosc" placeholder = "Ilość" required><br>
+    <input type="number" name="ilosc" placeholder = "Ilość" value="1" required><br>
     <input type="submit"><br>
 </form>
 <?php

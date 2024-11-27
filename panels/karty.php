@@ -1,5 +1,6 @@
 <?php
-    $query = mysqli_query($conn,"SELECT * FROM cards;"); 
+    $query = mysqli_query($conn,"SELECT cards.name as 'name', conditions.condition_name as 'condition_id', expansions.expansion_name as 'expansion_id', foils.foil_name as 'foil_id', languages.language_name as 'language_id', cards.notes as 'notes', cards.price as 'price', cards.quantity as 'quantity' FROM cards JOIN conditions on cards.condition_id=conditions.id join expansions on cards.expansion_id=expansions.id join foils on cards.foil_id=foils.id join languages on cards.language_id=languages.id;"); 
+
 
     echo '<table><thead>
             <tr>
