@@ -8,8 +8,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
-
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+    
 function sendemail_verify($username,$email,$token)
 {
     $mail = new PHPMailer(true);
@@ -18,10 +20,29 @@ function sendemail_verify($username,$email,$token)
     $mail->SMTPAuth   = true;
     $mail->Username   = 'u20_ernestkosieradzki@zsp1.siedlce.pl';
     $mail->Password   = 'nutcaizpuluaptqj';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port       = 465;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = 587;
 
+    $mail->setFrom("u20_ernestkosieradzki@zsp1.siedlce.pl", $username);
+    $mail->addAddress($email);
 
+    $mail->IsHTML(true);
+    $mail->Subject = "Email Verification Eldrazi Emporium";
+
+    $email_template = "
+        <h2>Zostałeś zajerestrowany w Eldrazi Emporium</h2>
+        <h5>Zweryfikuj swoję konto linkiem poniżej</h5>
+        <br/><br/>
+        <a href='https://jemszklanki.ct8.pl/register-verification.php?token=$token'> Zweryfikuj </a>
+    ";
+
+    $mail->Body    = $email_template;
+    if(!$mail->send()){
+        return "Email nie został wysłany, spróbuj ponownie";
+    }else{
+        return "Veryfikacja została wysłana na maila";
+    }
+    
 }
 
 $error_msg = '';
@@ -31,45 +52,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Sprawdź email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_msg = "Invalid email format.";
-    } elseif (strlen($password) < 8 ||
-              !preg_match('/[A-Z]/', $password) ||
-              !preg_match('/[0-9]/', $password) ||
-              !preg_match('/[\W]/', $password)) {
-        $error_msg = "Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.";
-    } elseif ($password !== $confirm_password) {
-        $error_msg = "Passwords do not match.";
-    } else {
-        // Hash
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-<<<<<<< Updated upstream
-        
-        // Wygenerowanie tokena do weryfikacji
-        $token = bin2hex(random_bytes('4'));
-
-=======
-        $token = md5(rand());
->>>>>>> Stashed changes
-        // Dodaj do bazy
-        $sql = "INSERT INTO users (username, password, email, admin, verified, token) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $admin = false; // Ustaw admina na nie
-        $verified = false;
-        $stmt->bind_param("sssb", $username, $hashed_password, $email, $admin, $verified, $token);
-
-        if ($stmt->execute()) {
-            sendemail_verify("$username","$email","$token");
-            header("Location: veryfikujhehehe.hwdp");
-            exit(); 
+    // Sprawdź czy już nie ma użytkownika o takiej samej nazwie
+    $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc(); 
+        // Sprawdź nazwę
+        if (username_verify($username, $user['username'])) {
+            $error_msg = "Użytkownik o takiej nazwie już istnieje";
         } else {
-            $error_msg = "Error: " . $stmt->error;
+            $error_msg = "Użytkownik o takim e-mailu już istnieje";
         }
+    } else {
 
-        $stmt->close();
+
+        // Sprawdź email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error_msg = "Invalid email format.";
+        } elseif (strlen($password) < 8 ||
+                !preg_match('/[A-Z]/', $password) ||
+                !preg_match('/[0-9]/', $password) ||
+                !preg_match('/[\W]/', $password)) {
+            $error_msg = "Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.";
+        } elseif ($password !== $confirm_password) {
+            $error_msg = "Passwords do not match.";
+        } else {
+            // Hash
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            // Dodaj do bazy
+            $sql = "INSERT INTO users (username, password, email, admin, verified, token) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $admin = false; // Ustaw admina na nie
+            $verified = false;
+            $token = md5(rand());
+            $stmt->bind_param("sssbbs", $username, $hashed_password, $email, $admin, $verified, $token);
+
+            if ($stmt->execute()    ) {
+                sendemail_verify("$username","$email","$token");
+                header("Location: index.php");
+                exit(); 
+            } else {
+                $error_msg = "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        }
     }
-}
+ }
+
 $conn->close();
 ?>
 
