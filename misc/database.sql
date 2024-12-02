@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 08:11 PM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Generation Time: Dec 03, 2024 at 12:06 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `cards`
+-- Table structure for table `cards`
 --
 
 CREATE TABLE `cards` (
@@ -54,7 +54,7 @@ INSERT INTO `cards` (`name`, `expansion_id`, `condition_id`, `foil_id`, `languag
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `conditions`
+-- Table structure for table `conditions`
 --
 
 CREATE TABLE `conditions` (
@@ -77,7 +77,7 @@ INSERT INTO `conditions` (`id`, `condition_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `expansions`
+-- Table structure for table `expansions`
 --
 
 CREATE TABLE `expansions` (
@@ -96,7 +96,7 @@ INSERT INTO `expansions` (`id`, `expansion_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `foils`
+-- Table structure for table `foils`
 --
 
 CREATE TABLE `foils` (
@@ -130,7 +130,7 @@ INSERT INTO `foils` (`id`, `foil_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `languages`
+-- Table structure for table `languages`
 --
 
 CREATE TABLE `languages` (
@@ -157,7 +157,7 @@ INSERT INTO `languages` (`id`, `language_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -166,23 +166,26 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `admin` tinyint(1) NOT NULL DEFAULT 0
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
+  `verified` tinyint(1) NOT NULL,
+  `token` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`) VALUES
-(2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0),
-(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1);
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`, `verified`, `token`) VALUES
+(2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0, 0, ''),
+(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 0, ''),
+(5, 'kupasrupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91');
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `cards`
+-- Indexes for table `cards`
 --
 ALTER TABLE `cards`
   ADD PRIMARY KEY (`name`),
@@ -192,31 +195,31 @@ ALTER TABLE `cards`
   ADD KEY `language_id` (`language_id`);
 
 --
--- Indeksy dla tabeli `conditions`
+-- Indexes for table `conditions`
 --
 ALTER TABLE `conditions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `expansions`
+-- Indexes for table `expansions`
 --
 ALTER TABLE `expansions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `foils`
+-- Indexes for table `foils`
 --
 ALTER TABLE `foils`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `languages`
+-- Indexes for table `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -255,7 +258,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
