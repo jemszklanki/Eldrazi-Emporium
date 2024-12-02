@@ -8,41 +8,58 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require __DIR__ . "/vendor/autoload.php";
+
+function username_verify($username, $user)
+{
+    if (isset($user['username'])) {
+        return $username === $user['username'];
+    }
+    return false;
+}
+
     
-function sendemail_verify($username,$email,$token)
+function sendemail_verify($username, $email, $stmt, $hashed_password, $admin, $verified, $token)
 {
     $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'u20_ernestkosieradzki@zsp1.siedlce.pl';
-    $mail->Password   = 'nutcaizpuluaptqj';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Username   = 'ernestkos11@gmail.com';
+    $mail->Password   = 'heyc vbge thfe ukzb';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    $mail->setFrom("u20_ernestkosieradzki@zsp1.siedlce.pl", $username);
+    $mail->setFrom("ernestkos11@gmail.comm");
     $mail->addAddress($email);
 
     $mail->IsHTML(true);
     $mail->Subject = "Email Verification Eldrazi Emporium";
 
     $email_template = "
-        <h2>Zostałeś zajerestrowany w Eldrazi Emporium</h2>
+        <h2>Witaj $username Zostałeś zajerestrowany w Eldrazi Emporium</h2>
         <h5>Zweryfikuj swoję konto linkiem poniżej</h5>
         <br/><br/>
         <a href='https://jemszklanki.ct8.pl/register-verification.php?token=$token'> Zweryfikuj </a>
     ";
 
-    $mail->Body    = $email_template;
-    if(!$mail->send()){
-        return "Email nie został wysłany, spróbuj ponownie";
-    }else{
-        return "Veryfikacja została wysłana na maila";
-    }
+    $mail->Body = $email_template;
     
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Wiadomość nie mogła zostać wysłana: {$mail->ErrorInfo}";
+        die;
+    }
+        $stmt->bind_param("sssbbs", $username, $hashed_password, $email, $admin, $verified, $token);
+
+        if ($stmt->execute()    ) {
+            header("Location: registered.php");
+            exit(); 
+        } else {
+            $error_msg = "Error: " . $stmt->error;
+        }
+    $stmt->close();
 }
 
 $error_msg = '';
@@ -61,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc(); 
         // Sprawdź nazwę
-        if (username_verify($username, $user['username'])) {
+        if (username_verify($username, $user)) {
             $error_msg = "Użytkownik o takiej nazwie już istnieje";
         } else {
             $error_msg = "Użytkownik o takim e-mailu już istnieje";
@@ -86,19 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO users (username, password, email, admin, verified, token) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $admin = false; // Ustaw admina na nie
-            $verified = false;
+            $verified = false; // Ustaw weryfikacje na nie
             $token = md5(rand());
-            $stmt->bind_param("sssbbs", $username, $hashed_password, $email, $admin, $verified, $token);
 
-            if ($stmt->execute()    ) {
-                sendemail_verify("$username","$email","$token");
-                header("Location: index.php");
-                exit(); 
-            } else {
-                $error_msg = "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
+            sendemail_verify($username, $email, $stmt, $hashed_password, $admin, $verified, $token);
         }
     }
  }
