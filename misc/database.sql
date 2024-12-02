@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 08:06 PM
+-- Generation Time: Dec 02, 2024 at 08:11 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -51,6 +51,132 @@ INSERT INTO `cards` (`name`, `expansion_id`, `condition_id`, `foil_id`, `languag
 ('test', 1, 1, 1, 1, 'damaged', 1.00, 2, NULL),
 ('tet', 1, 1, 1, 1, '', 1.19, 1, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `conditions`
+--
+
+CREATE TABLE `conditions` (
+  `id` int(11) NOT NULL,
+  `condition_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `conditions`
+--
+
+INSERT INTO `conditions` (`id`, `condition_name`) VALUES
+(1, 'Near Mint'),
+(2, 'Excellent'),
+(3, 'Good'),
+(4, 'Light Played'),
+(5, 'Played'),
+(6, 'Poor');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `expansions`
+--
+
+CREATE TABLE `expansions` (
+  `id` int(11) NOT NULL,
+  `expansion_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expansions`
+--
+
+INSERT INTO `expansions` (`id`, `expansion_name`) VALUES
+(1, 'EX4'),
+(2, 'EX2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `foils`
+--
+
+CREATE TABLE `foils` (
+  `id` int(11) NOT NULL,
+  `foil_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `foils`
+--
+
+INSERT INTO `foils` (`id`, `foil_name`) VALUES
+(1, 'None'),
+(2, 'Pre-Modern'),
+(3, 'Traditional'),
+(4, 'From The Vault'),
+(5, 'Etched'),
+(6, 'Textured'),
+(7, 'Double-rainbow'),
+(8, 'Confetti'),
+(9, 'Galaxy'),
+(10, 'Gilded'),
+(11, 'Halo'),
+(12, 'Invisible Ink'),
+(13, 'Neon Ink'),
+(14, 'Oil Slick'),
+(15, 'Silverscreen'),
+(16, 'Step-And-Compleat'),
+(17, 'Surge');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` int(11) NOT NULL,
+  `language_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `language_name`) VALUES
+(1, 'English'),
+(2, 'French'),
+(3, 'German'),
+(4, 'Italian'),
+(5, 'Portuguese'),
+(6, 'Spanish'),
+(7, 'Russian'),
+(8, 'Korean'),
+(9, 'Simplified Chinese'),
+(10, 'Traditional Chinese');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `admin` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`) VALUES
+(2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0),
+(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1);
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -64,6 +190,72 @@ ALTER TABLE `cards`
   ADD KEY `condition_id` (`condition_id`),
   ADD KEY `foil_id` (`foil_id`),
   ADD KEY `language_id` (`language_id`);
+
+--
+-- Indeksy dla tabeli `conditions`
+--
+ALTER TABLE `conditions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `expansions`
+--
+ALTER TABLE `expansions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `foils`
+--
+ALTER TABLE `foils`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `conditions`
+--
+ALTER TABLE `conditions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `expansions`
+--
+ALTER TABLE `expansions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `foils`
+--
+ALTER TABLE `foils`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
