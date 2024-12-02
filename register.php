@@ -1,8 +1,7 @@
 <?php
-// Start sesji
-session_start();
-
+require_once("header.php");
 require_once("db.php");
+require_once("navbar.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -114,22 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rejestracja - Emporium</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<!-- Baner -->
-<header class="banner">
-    <h1>Witamy w Eldrazi Emporium</h1>
-    <p>Twój one-stop shop dla kart MTG!</p>
-</header>
 
 <div class="form-container">
     <h2 class="text-center">Rejestracja</h2>
@@ -157,8 +140,7 @@ $conn->close();
         <button type="submit" class="btn btn-primary btn-block">Zarejestruj się</button>
     </form>
 </div>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-</body>
-</html>
+
+<?php 
+    require_once("footer.php");
+?>

@@ -1,54 +1,7 @@
-<?php
-// Start sesji
-session_start();
+<?php 
+    require_once("header.php");
+    require_once("navbar.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Eldrazi emporium</title>
-</head>
-<body>
-
-<!-- Baner -->
-<header class="banner">
-    <h1>Witamy w Eldrazi Emporium</h1>
-    <p>Twój one-stop shop dla kart MTG!</p>
-</header>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Trading Cards</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item nav-links">
-                    <a class="nav-link" href="cart.php">Koszyk</a>
-                </li>
-                <li class="nav-item nav-links">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item nav-links">
-                    <a class="nav-link" href="register.php">Rejestracja</a>
-                </li>
-                <!-- logut -->
-                <li>
-                <?php
-                if(isset($_SESSION['user_id'])){
-                    echo '<a class="nav-link" href="logout.php">Logout</a> </li>';
-                    echo  '<li><span class="nav-link witaj">Witaj '.$_SESSION['username'].'</span></li>';
-                }
-                ?>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 
 <!-- Gł. sekcja -->
 <main class="container mt-4">
@@ -89,11 +42,6 @@ session_start();
     </div>
 </main>
 
-<footer class="text-center mt-4">
-    <p>&copy; 2024 Eldrazi Emporium. All rights reserved.</p>
-</footer>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-</body>
-</html>
+<?php 
+    require_once("footer.php");
+?>
