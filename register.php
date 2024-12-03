@@ -39,7 +39,7 @@ function sendemail_verify($username, $email, $stmt, $hashed_password, $admin, $v
         <h2>Witaj $username Zostałeś zajerestrowany w Eldrazi Emporium</h2>
         <h5>Zweryfikuj swoję konto linkiem poniżej</h5>
         <br/><br/>
-        <a href='https://jemszklanki.ct8.pl/register-verification.php?token=$token'> Zweryfikuj </a>
+        <a href='https://jemszklanki.ct8.pl/confirm.php?email=$email&token=$token'> Zweryfikuj </a>
     ";
 
     $mail->Body = $email_template;
