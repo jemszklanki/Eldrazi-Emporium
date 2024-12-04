@@ -4,7 +4,38 @@ require_once("db.php");
 require_once("navbar.php");
 ?>
 
-<input id="nazwa" onkeyup="doSearch()" type="text">
+<input id="nazwa" onkeyup="doSearch()" type="text" placeholder="Nazwa">
+<input id="dodatek" onkeyup="doSearch()" type="text" placeholder="Dodatek">
+<label>Stan: </label>
+<select id="stan" oninput="doSearch()" required>
+    <option value="%">-</option>
+    <?php
+        $query = mysqli_query($conn,"SELECT * FROM conditions;"); 
+        while ($wynik = @mysqli_fetch_array($query)) {
+            echo "<option value='{$wynik["id"]}'>{$wynik["condition_name"]}</option>";
+        }
+    ?>
+</select>
+<label>Język: </label>
+<select id="jezyk" oninput="doSearch()" required>
+    <option value="%">-</option>
+    <?php
+        $query = mysqli_query($conn,"SELECT * FROM languages;"); 
+        while ($wynik = @mysqli_fetch_array($query)) {
+            echo "<option value='{$wynik["id"]}'>{$wynik["language_name"]}</option>";
+        }
+    ?>
+</select>
+<label>Foil: </label>
+<select id="foil" oninput="doSearch()" required>
+    <option value="%">-</option>
+    <?php
+        $query = mysqli_query($conn,"SELECT * FROM foils;"); 
+        while ($wynik = @mysqli_fetch_array($query)) {
+            echo "<option value='{$wynik["id"]}'>{$wynik["foil_name"]}</option>";
+        }
+    ?>
+</select><br>
 <table>
     <thead>
         <tr>

@@ -1,5 +1,11 @@
 const ajaxRet = document.getElementById("ajax-ret");
+
 const nameField = document.getElementById("nazwa");
+const expansionField = document.getElementById("dodatek");
+const languageField = document.getElementById("jezyk");
+const conditionField = document.getElementById("stan");
+const foilField = document.getElementById("foil");
+
 const previewImage = document.getElementById('preview');
 
 function doSearch(){
@@ -9,7 +15,7 @@ function doSearch(){
             ajaxRet.innerHTML = this.responseText;
         }
     };
-    xmlhttp.open("GET", "queries/shop_filter.php?name=" + nameField.value, true);
+    xmlhttp.open("GET", "queries/shop_filter.php?name=" + nameField.value + "&expansion=" + expansionField.value + "&lang=" + languageField.value  + "&condition=" + conditionField.value + "&foil=" + foilField.value, true);
     xmlhttp.send();
 }
 

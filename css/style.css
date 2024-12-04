@@ -3,6 +3,7 @@ body {
 }
 table {
     width: 100%;
+    table-layout: fixed; 
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -11,8 +12,8 @@ table {
 tr {
     border: 1px solid darkgray;
 }
-td{
-    width: 10%;
+th{
+    width: 11vw;
 }
 tr:nth-child(odd){
     background-color: rgb(225, 225, 225);
