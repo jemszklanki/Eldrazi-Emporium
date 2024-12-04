@@ -25,6 +25,12 @@
                     </li>';
                 }
                 ?>
+                <!-- Zarządzanie kontem -->
+                <?php
+                if(isset($_SESSION['user_id'])){
+                    echo '<li class="nav-item nav-links"> <a class="nav-link" href="account.php">Konto</a> </li>';
+                }
+                ?>
                 <!-- Admin panel -->
                 <?php
                 if(isset($_SESSION['admin'])){
