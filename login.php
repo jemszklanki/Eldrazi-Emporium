@@ -60,6 +60,7 @@ $conn->close();
         <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
     <p class="text-center mt-3">Nie masz konta? Luźna guma! <a href="register.php">Zarejestruj się tutaj</a></p>
+    <p class="text-center mt-3">Zapomniałeś hasła albo nicku? Luźna guma! <a href="forgotpass.php">Zmień je tutaj</a></p>
 </div>
 
 <?php 
