@@ -56,3 +56,11 @@ button:active{
     text-decoration: none;
     color: black;
 }
+#preview {
+    width: 150px;
+    height: 210px;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    border: 1px solid gray;
+    border-radius: 7px;
+}

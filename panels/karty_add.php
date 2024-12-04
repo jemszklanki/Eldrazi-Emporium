@@ -52,6 +52,8 @@ if(!isset($conn)){
     </select><br>
     <label>Notatki</label><br>
     <input type="textfield" name="notatki" placeholder = "Notatki"><br>
+    <label>Obraz</label><br>
+    <input type="textfield" name="image" placeholder = "Obraz"><br>
     <label>Cena</label><br>
     <input type="number" name="cena" placeholder = "Cena" step="0.01" value="1" required><br>
     <label>Ilość</label><br>
@@ -67,7 +69,8 @@ if(!isset($conn)){
         isset($_POST['jezyk'])   &&
         isset($_POST['notatki'])   &&
         isset($_POST['cena'])   &&
-        isset($_POST['ilosc'])
+        isset($_POST['ilosc'])  &&
+        isset($_POST['image'])
     ){
         $query = mysqli_query($conn, "INSERT INTO cards VALUES (
         '{$_POST["nazwa"]}', 
@@ -77,7 +80,8 @@ if(!isset($conn)){
         '{$_POST["jezyk"]}', 
         '{$_POST["notatki"]}', 
         '{$_POST["cena"]}', 
-        '{$_POST["ilosc"]}'
+        '{$_POST["ilosc"]}', 
+        '{$_POST["image"]}'
         )");
         header("Location: ../admin.php");
         die;

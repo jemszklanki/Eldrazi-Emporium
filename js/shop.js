@@ -1,5 +1,6 @@
 const ajaxRet = document.getElementById("ajax-ret");
 const nameField = document.getElementById("nazwa");
+const previewImage = document.getElementById('preview');
 
 function doSearch(){
     var xmlhttp = new XMLHttpRequest();
@@ -11,3 +12,22 @@ function doSearch(){
     xmlhttp.open("GET", "queries/shop_filter.php?name=" + nameField.value, true);
     xmlhttp.send();
 }
+
+
+function showPreview(imageSrc, event) {
+    previewImage.src = "img/"+imageSrc+".jpg";  //  JAK BEDZIE WIECEJ OBRAZKOW TO ZMIEN ROZSZERZENIE, JPG SSIE !!!!!
+    const cursorX = event.pageX;
+    const cursorY = event.pageY;
+    previewImage.style.left = `${cursorX + 10}px`;
+    previewImage.style.top = `${cursorY - 210}px`;
+    previewImage.style.display = 'block';
+}
+  
+function hidePreview() {
+    previewImage.style.display = 'none';
+}
+function previewError() {
+    previewImage.src = "img/no_preview.png";
+}
+
+  

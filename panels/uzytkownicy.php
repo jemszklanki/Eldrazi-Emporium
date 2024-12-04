@@ -32,5 +32,4 @@
         </tr>"; 
     }
     echo '</tbody></table>';
-    echo "<br><button onclick='getForm(31)'>DODAJ</button>";
 ?>
