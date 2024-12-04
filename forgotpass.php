@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die;
             }
 
-            header("Location: resetonmail.php");
+            header("Location: confirm/resetonmail.php");
 
             $stmt->close();
 
