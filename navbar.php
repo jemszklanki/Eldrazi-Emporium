@@ -5,7 +5,6 @@
     <p>Twój one-stop shop dla kart MTG!</p>
 </header>
 </a>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">

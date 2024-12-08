@@ -60,9 +60,6 @@ if(isset($_GET["n"])){
         case 23:
             require_once("panels/dodatki_del.php");
             break;
-        case 31:
-            require_once("panels/uzytkownicy_add.php");
-            break;
         case 32:
             require_once("panels/uzytkownicy_edit.php");  
             break;
