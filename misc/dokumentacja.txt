@@ -1,5 +1,13 @@
+
+
 CSS:
-    Strona ma minimalistyczny design, wykorzystuje Bootstrap oraz mały plike style.css
+    - Strona ma minimalistyczny design, wykorzystuje Bootstrap oraz mały plik style.css
+    - style.css:
+        - Style wszytkich tabel i przycisków na stronie
+        - Style baneru i navbarów
+        - Klasy i style potrzebne do działania podglądu kart na stronie sklepu
+    - folder img:
+        - Folder zawiera obrazki wykorzystywane na stronie
 
 Javascript:
     - JQuery i popper zimportowane do poprawnego działania bootstrapa
@@ -21,12 +29,20 @@ PHP:
         - Folder zawiera pliki wykonujące odpowiednie kwerendy
         - Kwerendy modyfikujące dane sprawdzają czy użytkownik to admin_panel
 
+    - db.php:
+        - Łączy się z bazą danych, często includowany w innych plikach przy wykonywaniu kwerend.
+
     - header.php:
         - Plik zawiera nagłówek strony, w tym style, charset i deklarację viewportów.
+        - Zaczyna sesję
         - Jest dodawany na większości podstron.
 
     - navbar.php:
         - Plik zawiera baner i navbar strony.
+        - Jest dodawany na większości podstron.
+
+    - footer.php:
+        - Plik zawiera stopkę strony i skrypty do bootstrapa.
         - Jest dodawany na większości podstron.
 
     - index.php:
@@ -42,5 +58,42 @@ PHP:
         - Panel administratora
         - wykorzystuje pliki admin_panel.js, universal_admin_form.php oraz universal_query_switch.php
         do działania z niewielką ilością odświeżania strony 
-        - Universal_admin_form.php:
-            - 
+        - universal_admin_form.php:
+            - Plik służy do ułatwienia wyświetlania formularzy i paneli AJAX-em (folder panels)
+            - Dzięki niemu w admin_panel.js wystarczy odwołać się do jednego pliku i w razie potrzeby
+            rozbudowy strony, można łatwo dodać nowe panele.
+        - universal_query_switch.php:
+            - Plik służy do ułatwienia dostępu do kwerend przez inne pliki
+            - Ułatwia potencjalną rozbudowę strony
+            - kwerendy(folder queries) są zabezpieczone przed uruchomieniem przez użytkownika
+            niebędącego adminem.
+        - Panel pozwala na modyfikację, usuwanie i dodawanie kart, użytkowników i dodatków.
+
+    - register.php:
+        - Służy do rejestracji konta na stronie
+        - Konto wymaga potwierdzenia przez email.
+
+    - login.php:
+        - Służy do logowania na stronie
+        - Po zalogowaniu daje dostęp do innych podstron poprzez navbar
+        - Jeśli użytkownik to admin, daje dostęp do panelu administratora
+
+    - logout.php:
+        - Wylogowuje ze strony.
+
+Folder misc:
+    - dokumentacja
+    - zrzut bazy danych
+
+
+    TODO: 
+
+    account
+    cart 
+    confirm
+    forgotpass
+    registered
+    reset 
+
+    + foldery confirm i PHPmailer
+
