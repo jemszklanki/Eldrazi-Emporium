@@ -25,7 +25,7 @@ function getForm(n, index){
 //  Jesli chcemy zrobic **WSZYSTKO** ajaxem, trzeba dodac do tego overload ale I can't be fucked to do that rn
 //  Alternatywnie trzymać to w sesji
 function doQuery(n, index){
-    var xmlhttp = new XMLHttpRequest(); //  TODO doprowadz to do dzialania
+    var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "universal_query_switch.php?n=" + n + "&index=" + index, true);
     xmlhttp.send();
     xmlhttp.onreadystatechange = function() {

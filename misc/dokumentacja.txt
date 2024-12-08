@@ -1,0 +1,46 @@
+CSS:
+    Strona ma minimalistyczny design, wykorzystuje Bootstrap oraz mały plike style.css
+
+Javascript:
+    - JQuery i popper zimportowane do poprawnego działania bootstrapa
+
+    - Plik admin_panel.js:
+        - Obsługuje wyświetlanie formularzy i wykonywanie kwerend w panelu panelu admina 
+    
+    - Plik shop.js:
+        - Wyszukiwanie produktów na stronie sklepu
+        - Podgląd zdjęć kart
+
+PHP:
+    - panels:
+        - Folder zawiera pliki przeznaczone do wyciąganie AJAX-em dla panelu admina
+        - Każdy z nich dodatkowo sprawdza czy użytkownik jest adminem przed wykonaniem czegokolwiek
+        - Pliki wyświetlają odpowiednie rekordy tabel oraz formularze w panelu admina
+    
+    - queries:
+        - Folder zawiera pliki wykonujące odpowiednie kwerendy
+        - Kwerendy modyfikujące dane sprawdzają czy użytkownik to admin_panel
+
+    - header.php:
+        - Plik zawiera nagłówek strony, w tym style, charset i deklarację viewportów.
+        - Jest dodawany na większości podstron.
+
+    - navbar.php:
+        - Plik zawiera baner i navbar strony.
+        - Jest dodawany na większości podstron.
+
+    - index.php:
+        - Strona główna
+        - Wyświetla 3 wyróżnione karty z bazy danych
+    
+    - shop.php:
+        - Wyświetla karty z bazy danych
+        - Możliwość filtrowania wyników bez odświeżania strony dzięki technologii AJAX
+        - Możliwość dodania kart do koszyka
+
+    - admin.php:
+        - Panel administratora
+        - wykorzystuje pliki admin_panel.js, universal_admin_form.php oraz universal_query_switch.php
+        do działania z niewielką ilością odświeżania strony 
+        - Universal_admin_form.php:
+            - 

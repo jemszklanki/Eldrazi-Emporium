@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("db.php");
+require_once("../db.php");
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -23,4 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
 }
+// Tutaj masz zmienne w jakich dostajesz gowno :p
+echo $_GET['quantity'].$_GET['itemName'];
 ?>

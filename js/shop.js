@@ -36,6 +36,8 @@ function previewError() {
     previewImage.src = "img/no_preview.png";
 }
 
-function addToCart(itemName) {
-   
+function addToCart(itemName, quantity) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "queries/add_cart.php?itemName=" + itemName + "&quantity=" + quantity, true);
+    xmlhttp.send();
 }
