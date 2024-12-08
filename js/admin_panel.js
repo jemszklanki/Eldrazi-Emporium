@@ -51,3 +51,5 @@ function formToSession(n){
         //  w sesji wartości z formów, jak coś to skrypty od tego rób w folderze 'misc'
     }
 }
+
+getForm(1); //  Default to form z kartami

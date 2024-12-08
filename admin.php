@@ -8,11 +8,25 @@ if(isset($_SESSION['admin'])){
     die;
 }
 ?>
-
+<hr>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(1)">Karty</a>
+                </li>
+                <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(2)">Dodatki</a>
+                </li>
+                <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(3)">Użytkownicy</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <main class="container mt-4">
-    <button id="users" onclick="getForm(1)">Karty</button>
-    <button id="cards" onclick="getForm(2)">Dodatki</button>
-    <button id="expansions" onclick="getForm(3)">Użytkownicy</button>
     <div id="ajax-ret">
         <!-- Tutaj ajax ze skryptu -->
     </div>

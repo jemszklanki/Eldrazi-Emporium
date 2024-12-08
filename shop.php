@@ -3,7 +3,7 @@ require_once("header.php");
 require_once("db.php");
 require_once("navbar.php");
 ?>
-
+<br>
 <input id="nazwa" onkeyup="doSearch()" type="text" placeholder="Nazwa">
 <input id="dodatek" onkeyup="doSearch()" type="text" placeholder="Dodatek">
 <label>Stan: </label>
@@ -36,6 +36,7 @@ require_once("navbar.php");
         }
     ?>
 </select><br>
+<br>
 <table>
     <thead>
         <tr>

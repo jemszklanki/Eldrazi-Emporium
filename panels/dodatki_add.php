@@ -10,6 +10,7 @@ if(!isset($conn)){
     require_once('../db.php');
 }
 ?>
+
 <form method="POST" action="panels/dodatki_add.php">
     <label>Nazwa</label><br>
     <input type="text" name="nazwa" placeholder = "MH4" required><br>

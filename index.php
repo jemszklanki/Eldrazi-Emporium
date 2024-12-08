@@ -11,6 +11,7 @@
         <!-- Karty -->
         <?php
             $wyroznione = array("dreadmaw","storm crow","Pentad Prism");
+            
             $query = "SELECT * FROM cards WHERE name LIKE '{$wyroznione[0]}' OR name LIKE '{$wyroznione[1]}' OR name LIKE '{$wyroznione[2]}'";
             
             $cards = mysqli_query($conn, $query);
