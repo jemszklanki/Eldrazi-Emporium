@@ -94,6 +94,9 @@ Folder misc:
     forgotpass
     registered
     reset 
-
+    changedpass
+    resetonmail
+    verified
+    
     + foldery confirm i PHPmailer
 

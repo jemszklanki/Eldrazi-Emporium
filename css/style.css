@@ -57,6 +57,17 @@ button:active{
     text-decoration: none;
     color: black;
 }
+.backHome{
+    min-height: 40vh;
+    padding-left: 5vw;
+    display: block;
+}
+.backHome a{
+    color: gray;
+}
+.backHome a:active{
+    color: black;
+}
 #preview {
     width: 150px;
     height: 210px;
