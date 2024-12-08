@@ -39,43 +39,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 // Wyświetl koszyk
 $cart = $_SESSION['cart'] ?? [];
 ?>
-
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koszyk</title>
-
-</head>
-<body>
-    <h1>Twój Koszyk</h1>
-    <?php if (!empty($cart)): ?>
-        <table>
-            <thead>
+<h1>Twój Koszyk</h1>
+<?php if (!empty($cart)): ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Przedmiot</th>
+                <th>Ilość</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($cart as $itemName => $quantity): ?>
                 <tr>
-                    <th>Przedmiot</th>
-                    <th>Ilość</th>
-                    <th>Akcje</th>
+                    <td><?= is_array($itemName) ? 'Nieprawidłowa nazwa' : htmlspecialchars($itemName) ?></td>
+                    <td><?= htmlspecialchars((string)$quantity) ?></td>
+                    <td>
+                        <button onclick="removeFromCart(<?= json_encode($itemName) ?>)">Usuń</button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($cart as $itemName => $quantity): ?>
-                    <tr>
-                        <td><?= is_array($itemName) ? 'Nieprawidłowa nazwa' : htmlspecialchars($itemName) ?></td>
-                        <td><?= htmlspecialchars((string)$quantity) ?></td>
-                        <td>
-                            <button onclick="removeFromCart(<?= json_encode($itemName) ?>)">Usuń</button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>Twój koszyk jest pusty.</p>
-    <?php endif; ?>
-</body>
-</html>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p>Twój koszyk jest pusty.</p>
+<?php endif; ?>
 <script src='js/shop.js'></script>
 <?php
 require_once("footer.php");
