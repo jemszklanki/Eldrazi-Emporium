@@ -21,7 +21,7 @@ function doSearch(){
 
 
 function showPreview(imageSrc, event) {
-    previewImage.src = "img/"+imageSrc+".jpg";  //  JAK BEDZIE WIECEJ OBRAZKOW TO ZMIEN ROZSZERZENIE, JPG SSIE !!!!!
+    previewImage.src = "img/"+imageSrc+".jpg";  //  JAK BEDZIE WIECEJ OBRAZKOW TO ZMIEN ROZSZERZENIE, JPG SSIE !!!!! :-}
     const cursorX = event.pageX;
     const cursorY = event.pageY;
     previewImage.style.left = `${cursorX + 10}px`;
@@ -36,4 +36,6 @@ function previewError() {
     previewImage.src = "img/no_preview.png";
 }
 
-  
+function addToCart(itemName) {
+   
+}

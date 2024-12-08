@@ -63,8 +63,8 @@ require_once("navbar.php");
                     <td>".$wynik["notes"]."</td>
                     <td>".$wynik["price"]."</td>
                     <td>".$wynik["quantity"]."</td>
-                    <td><button onclick=''>Dodaj do koszyka</button></td>
-                </tr>"; 
+                    <td><button onclick='addToCart(".'"'.$wynik["name"].'"'.")'>Dodaj do koszyka</button></td>
+                    </tr>";
             }
         ?>
     </tbody>
