@@ -29,6 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($user['admin'] == true) {
                     $_SESSION['admin'] = $user['admin'];
                 }
+
+                // Synchronizacja koszyka
+                $userId = $user['id'];
+
+                // Usuń nadwyżkę z `cart_log`, jeśli w tabeli `cards` jest mniej elementów
+                $cleanupSql = "
+                    UPDATE cart_log
+                    JOIN cards ON cart_log.card_id = cards.card_id 
+                    SET cart_log.quantity = cards.quantity
+                    WHERE cart_log.quantity > cards.quantity;
+                ";
+                $cleanupStmt = $conn->prepare($cleanupSql);
+                $cleanupStmt->bind_param("i", $userId);
+                $cleanupStmt->execute();
+                $cleanupStmt->close();
+
+                // Pobierz dane z `cart_log` i zapisz je do sesji
+                $cartSql = "SELECT item_name, quantity FROM cart_log WHERE user_id = ?";
+                $cartStmt = $conn->prepare($cartSql);
+                $cartStmt->bind_param("i", $userId);
+                $cartStmt->execute();
+                $cartResult = $cartStmt->get_result();
+
+                $_SESSION['cart'] = [];
+                while ($row = $cartResult->fetch_assoc()) {
+                    $_SESSION['cart'][$row['item_name']] = $row['quantity'];
+                }
+                $cartStmt->close();
+
                 // Przekieruj na index po zalogowaniu
                 header("Location: index.php");
                 exit();
@@ -44,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
-
 
 <div class="form-container">
     <h2 class="text-center">Login</h2>
@@ -64,5 +92,5 @@ $conn->close();
 </div>
 
 <?php 
-    require_once("footer.php");
+require_once("footer.php");
 ?>

@@ -32,6 +32,7 @@ function showPreview(imageSrc, event) {
 function hidePreview() {
     previewImage.style.display = 'none';
 }
+
 function previewError() {
     previewImage.src = "img/no_preview.png";
 }
@@ -40,4 +41,25 @@ function addToCart(itemName, quantity) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "queries/add_cart.php?itemName=" + itemName + "&quantity=" + quantity, true);
     xmlhttp.send();
+}
+
+function removeFromCart(itemName) {
+    fetch('cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            action: 'remove',
+            name: itemName
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        if (data.success) {
+            location.reload();
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
