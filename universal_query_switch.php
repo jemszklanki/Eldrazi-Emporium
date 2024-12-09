@@ -37,6 +37,9 @@ if(isset($_GET["n"])){
         case 33:
             require_once("queries/uzytkownicy_del_query.php");
             break;    
+        case 43:
+            require_once("queries/zamowienia_del_query.php");
+            break;    
         default:
             die;
     }

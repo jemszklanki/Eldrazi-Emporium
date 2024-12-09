@@ -4,7 +4,7 @@
         die;
     }
     $query = mysqli_query($conn,"SELECT * FROM users");
-    echo '<table class="col5"><thead>
+    echo '<table class="col7"><thead>
             <tr>
                 <th>ID</th>
                 <th>Login</th>
