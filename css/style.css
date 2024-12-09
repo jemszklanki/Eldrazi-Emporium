@@ -89,6 +89,9 @@ button:active{
 .backHome a:active{
     color: black;
 }
+.hidden {
+    display: none;
+}
 #preview {
     width: 150px;
     height: 210px;
