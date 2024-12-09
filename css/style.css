@@ -12,8 +12,29 @@ table {
 tr {
     border: 1px solid darkgray;
 }
-th{
+.col10 th{
+    width: 10vw;
+}
+.col9 th{
     width: 11vw;
+}
+.col8 th{
+    width: 12vw;
+}
+.col7 th{
+    width: 14vw;
+}
+.col6 th{
+    width: 16vw;
+}
+.col5 th{
+    width: 20vw;
+}
+.col4 th{
+    width: 25vw;
+}
+.col3 th{
+    width: 33vw;
 }
 tr:nth-child(odd){
     background-color: rgb(225, 225, 225);

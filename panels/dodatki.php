@@ -1,6 +1,6 @@
 <?php
     $query = mysqli_query($conn,"SELECT * FROM expansions");
-    echo '<table><thead>
+    echo '<table class="col3"><thead>
             <tr>
                 <th>Nazwa</th>
                 <th>Edytuj</th>
