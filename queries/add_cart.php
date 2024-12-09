@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once("db.php");
+require_once("../db.php");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $itemName = $_POST['name'] ?? null;
-    $quantity = intval($_POST['quantity'] ?? 1); // Ilość przekazana z JavaScript, domyślnie 1
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $itemName = $_GET['itemName'] ?? null;
+    $quantity = intval($_GET['quantity'] ?? 1); // Ilość przekazana z JavaScript, domyślnie 1
 
     if ($itemName && $quantity > 0) {
         // Sprawdź, czy koszyk już istnieje w sesji
@@ -81,6 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid item name or quantity']);
+        echo $itemName;
+        echo $quantity;
     }
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
