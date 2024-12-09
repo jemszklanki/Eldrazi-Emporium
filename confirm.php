@@ -19,7 +19,7 @@ require_once("navbar.php");
             AND verified=0");
         if($sql->num_rows > 0){
             $conn->query("UPDATE users SET verified=1, token='' WHERE token='$token' AND email='$email'");
-            header('Location: confirm/verified.php');
+            header('Location: verified.php');
         } else {
             redirect();
         }

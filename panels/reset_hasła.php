@@ -17,7 +17,7 @@ $confirm_password = $_POST['confirm_password'];
             // Hash
             $hashed_password = password_hash($newpassword, PASSWORD_DEFAULT);
             $conn->query("UPDATE users SET password='$hashed_password' WHERE email='$email'");
-            header('Location: confirm/changedpass.php');
+            header('Location: changedpass.php');
             exit();
     }
 }
