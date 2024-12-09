@@ -31,7 +31,7 @@ function sendemail_verify($username, $email, $stmt, $hashed_password, $admin, $v
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    $mail->setFrom("ernestkos11@gmail.comm");
+    $mail->setFrom("ernestkos11@gmail.com");
     $mail->addAddress($email);
 
     $mail->IsHTML(true);

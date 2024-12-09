@@ -5,10 +5,25 @@ require_once("navbar.php");
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $sql = "SELECT email FROM users WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $email = $stmt->get_result();
+    $stmt->close();
 }
+
 $cart = $_SESSION['cart'] ?? [];
+
 $cardsPrice = (float)0.00;
 $totalPrice = (float)0.00;
+if (!isset($_SESSION['cardsPrice'])) {
+    $_SESSION['cardsPrice'] = $cardsPrice;
+}
+if (!isset($_SESSION['totalPrice'])) {
+    $_SESSION['totalPrice'] = $totalPrice;
+}
+
 $error_msg = '';
 
 function price($itemName){
@@ -30,14 +45,26 @@ function price($itemName){
     }
 }
 
-if (isset($_SESSION['user_id'])) {
-    $sql = "SELECT email FROM users WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $email = $stmt->get_result();
-    $stmt->close();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!isset($_SESSION['user_id'])) {
+        $_SESSION['temail'] = $_POST['email'];
+    }
+
+    $_SESSION['shipment_method'] = $_POST['shipment_method'];
+
+    $_SESSION['ulica'] = isset($_POST['ulica']) ? $_POST['ulica'] : null;
+    $_SESSION['numer'] = isset($_POST['numer']) ? $_POST['numer'] : null;
+
+    $_SESSION['payment_method'] = $_POST['payment_method'];
+
+    header("Location: payment.php");
+    $conn->close();
+    exit();
 }
+
+
 ?>
 
 
@@ -69,6 +96,7 @@ if (isset($_SESSION['user_id'])) {
 <?php
     foreach ($cart as $itemName => $quantity) {
         $cardsPrice += price($itemName) * $quantity;
+        $_SESSION['cardsPrice'] = $cardsPrice;
     }
 ?>
 <h2>Cena produktów: <?= $cardsPrice ?> zł</h2>
@@ -80,6 +108,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="alert alert-danger"><?= $error_msg; ?></div>
     <?php endif; ?>
 
+    <!-- FORMULARZ -->
     <form method="POST" action="">
 
         <?php if (!isset($_SESSION['user_id'])) {
@@ -138,10 +167,10 @@ if (isset($_SESSION['user_id'])) {
                 ?>
             </select>
         </div>
+        <h2 id='fullprice'></h2>
         <button type="submit" class="btn btn-primary btn-block" id="but">Kup</button>
     </form>
 </div>
-<h1 id='eloKurwa'></h1>
 </body>
 
 <script src='js/buy.js'></script>
