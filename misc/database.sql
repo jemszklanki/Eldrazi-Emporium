@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 12:06 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Dec 09, 2024 at 01:47 AM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cards`
+-- Struktura tabeli dla tabeli `cards`
 --
 
 CREATE TABLE `cards` (
@@ -54,7 +54,30 @@ INSERT INTO `cards` (`name`, `expansion_id`, `condition_id`, `foil_id`, `languag
 -- --------------------------------------------------------
 
 --
--- Table structure for table `conditions`
+-- Struktura tabeli dla tabeli `cart_log`
+--
+
+CREATE TABLE `cart_log` (
+  `user_id` int(11) NOT NULL,
+  `item_name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_log`
+--
+
+INSERT INTO `cart_log` (`user_id`, `item_name`, `quantity`, `id`) VALUES
+(4, 'dreadmaw', 2, 15),
+(4, 'sda', 1, 16),
+(4, 'storm crow', 1, 17),
+(4, 'test', 2, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `conditions`
 --
 
 CREATE TABLE `conditions` (
@@ -77,7 +100,7 @@ INSERT INTO `conditions` (`id`, `condition_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `expansions`
+-- Struktura tabeli dla tabeli `expansions`
 --
 
 CREATE TABLE `expansions` (
@@ -96,7 +119,7 @@ INSERT INTO `expansions` (`id`, `expansion_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `foils`
+-- Struktura tabeli dla tabeli `foils`
 --
 
 CREATE TABLE `foils` (
@@ -130,7 +153,7 @@ INSERT INTO `foils` (`id`, `foil_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Struktura tabeli dla tabeli `languages`
 --
 
 CREATE TABLE `languages` (
@@ -157,7 +180,7 @@ INSERT INTO `languages` (`id`, `language_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabeli dla tabeli `users`
 --
 
 CREATE TABLE `users` (
@@ -177,15 +200,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`, `verified`, `token`) VALUES
 (2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0, 0, ''),
-(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 0, ''),
-(5, 'kupasrupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91');
+(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 1, ''),
+(5, 'kupasrupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91'),
+(6, 'jemszklanki', '$2y$10$hcczb3vscth46w6Dkm0VZ.89Hjics.ZYiytrTwC.HOkdmsrAF8AUy', 'helok@gmail.com', '2024-12-05 16:49:42', 0, 0, '5bcd97f84577193c94e4b13d690b8c91'),
+(7, 'sdgfdhdf', '$2y$10$dgwORIRkg5Lae6MoIEs9aeCCtRrYT2DzlNGXcBn4Zq6Bgij7U5Tkq', 'dfgjdfolgj@gmail.com', '2024-12-05 16:50:23', 0, 1, '');
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `cards`
+-- Indeksy dla tabeli `cards`
 --
 ALTER TABLE `cards`
   ADD PRIMARY KEY (`name`),
@@ -195,31 +220,39 @@ ALTER TABLE `cards`
   ADD KEY `language_id` (`language_id`);
 
 --
--- Indexes for table `conditions`
+-- Indeksy dla tabeli `cart_log`
+--
+ALTER TABLE `cart_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_name` (`item_name`,`quantity`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeksy dla tabeli `conditions`
 --
 ALTER TABLE `conditions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `expansions`
+-- Indeksy dla tabeli `expansions`
 --
 ALTER TABLE `expansions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `foils`
+-- Indeksy dla tabeli `foils`
 --
 ALTER TABLE `foils`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `languages`
+-- Indeksy dla tabeli `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -229,6 +262,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart_log`
+--
+ALTER TABLE `cart_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `conditions`
@@ -258,7 +297,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -272,6 +311,13 @@ ALTER TABLE `cards`
   ADD CONSTRAINT `cards_ibfk_2` FOREIGN KEY (`condition_id`) REFERENCES `conditions` (`id`),
   ADD CONSTRAINT `cards_ibfk_3` FOREIGN KEY (`foil_id`) REFERENCES `foils` (`id`),
   ADD CONSTRAINT `cards_ibfk_4` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`);
+
+--
+-- Constraints for table `cart_log`
+--
+ALTER TABLE `cart_log`
+  ADD CONSTRAINT `cart_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `cart_log_ibfk_2` FOREIGN KEY (`item_name`) REFERENCES `cards` (`name`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

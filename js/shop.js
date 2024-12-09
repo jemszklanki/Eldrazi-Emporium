@@ -44,22 +44,12 @@ function addToCart(itemName, quantity) {
 }
 
 function removeFromCart(itemName) {
-    fetch('cart.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            action: 'remove',
-            name: itemName
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        if (data.success) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
             location.reload();
         }
-    })
-    .catch(error => console.error('Error:', error));
+    };
+    xmlhttp.open("GET", "queries/remove_cart.php?itemName=" + itemName, true);
+    xmlhttp.send();
 }
