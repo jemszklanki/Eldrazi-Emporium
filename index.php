@@ -10,7 +10,7 @@
     <div class="row">
         <!-- Karty -->
         <?php
-            $wyroznione = array("dreadmaw","storm crow","Pentad Prism");
+            $wyroznione = array("Elesh Norn","Griselbrand","Sheoldred");
             
             $query = "SELECT * FROM cards WHERE name LIKE '{$wyroznione[0]}' OR name LIKE '{$wyroznione[1]}' OR name LIKE '{$wyroznione[2]}'";
             

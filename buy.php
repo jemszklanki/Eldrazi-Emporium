@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
         <button type="submit" class="btn btn-primary btn-block" id="but">Kup</button>
     </form>
 </div>
-
+<h1 id='eloKurwa'></h1>
 </body>
 
 <script src='js/buy.js'></script>

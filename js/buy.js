@@ -1,7 +1,7 @@
 const comboBox = document.getElementById("ship");
 const street = document.getElementById("stret");
 const number = document.getElementById("numb");
-const submut = document.getElementById("but");
+const siea = document.getElementById("eloKurwa");
 
 comboBox.addEventListener("input", ()=>{
     if(comboBox.value == "3")
@@ -12,4 +12,12 @@ comboBox.addEventListener("input", ()=>{
         street.classList.remove("hidden");
         number.classList.remove("hidden");
     }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            siea.innerHTML = this.responseText;
+        }
+    };
+    xmlhttp.open("GET", "queries/calc_delivery.php?id=" + comboBox.value, true);
+    xmlhttp.send();
 })
