@@ -71,7 +71,7 @@ if(isset($_GET["n"])){
             require_once("panels/uzytkownicy_del.php");
             break;
         case 42:
-
+            require_once("panels/zamowienia_edit.php");  
             break;
         case 43:
             require_once("panels/zamowienia_del.php");
