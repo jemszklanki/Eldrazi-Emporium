@@ -23,6 +23,12 @@ if(isset($_SESSION['admin'])){
                     <a class="nav-link" href="#" onclick="getForm(3)">Użytkownicy</a>
                 </li>
                 <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(5)">Opcje dostawy</a>
+                </li>
+                <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(6)">Opcje płatności</a>
+                </li>
+                <li class="nav-item nav-links">
                     <a class="nav-link" href="#" onclick="getForm(4)">Zamówienia</a>
                 </li>
             </ul>

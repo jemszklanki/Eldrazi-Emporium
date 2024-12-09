@@ -33,6 +33,8 @@ if(comboBox.value == "3")
     } else {
         street.classList.remove("hidden");
         number.classList.remove("hidden");
+        street.required = true;
+        number.required = true;
     }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

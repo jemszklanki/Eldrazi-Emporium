@@ -46,6 +46,12 @@ if(isset($_GET["n"])){
         case 4:
             require_once("panels/zamowienia.php");
             break;
+        case 5:
+            require_once("panels/dostawy.php");
+            break;
+        case 6:
+            require_once("panels/platnosci.php");
+            break;
         case 11:
             require_once("panels/karty_add.php");
             break;
@@ -75,6 +81,24 @@ if(isset($_GET["n"])){
             break;
         case 43:
             require_once("panels/zamowienia_del.php");
+            break;
+        case 51:
+            require_once("panels/dostawy_add.php");
+            break;
+        case 52:
+            require_once("panels/dostawy_edit.php");  
+            break;
+        case 53:
+            require_once("panels/dostawy_del.php");
+            break;
+        case 61:
+            require_once("panels/platnosci_add.php");
+            break;
+        case 62:
+            require_once("panels/platnosci_edit.php");  
+            break;
+        case 63:
+            require_once("panels/platnosci_del.php");
             break;
         default:
             header("Location: index.php");
