@@ -1,11 +1,15 @@
-const comboBox = document.getElementById("id-twojego-combo-boxa");
-const street = document.getElementById("id-twojego-inputu");
-const number = document.getElementById("id-twojego-inputu");
+const comboBox = document.getElementById("ship");
+const street = document.getElementById("stret");
+const number = document.getElementById("numb");
+const submut = document.getElementById("but");
 
 comboBox.addEventListener("input", ()=>{
-    if(comboBox.value == "wartosc-po-jaka-sprawdzasz")
+    if(comboBox.value == "3")
     {
-        // street.classList.add("hidden");
-        // street.classList.remove("hidden");
+        street.classList.add("hidden");
+        number.classList.add("hidden");
+    } else {
+        street.classList.remove("hidden");
+        number.classList.remove("hidden");
     }
 })
