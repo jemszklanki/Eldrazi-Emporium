@@ -8,6 +8,7 @@ if (isset($_SESSION['user_id'])) {
 }
 $cart = $_SESSION['cart'] ?? [];
 $cardsPrice = (float)0.00;
+$totalPrice = (float)0.00;
 $error_msg = '';
 
 function price($itemName){
@@ -74,9 +75,11 @@ if (isset($_SESSION['user_id'])) {
 
 <div>
     <h2 class="text-center">Dane zamówienia</h2>
+
     <?php if ($error_msg): ?>
         <div class="alert alert-danger"><?= $error_msg; ?></div>
     <?php endif; ?>
+
     <form method="POST" action="">
 
         <?php if (!isset($_SESSION['user_id'])) {
@@ -89,7 +92,7 @@ if (isset($_SESSION['user_id'])) {
 
         <div class="form-group">
             <label for="shipment_method">Wybierz metodę dostawy</label>
-                <select class="form-control" name="shipment_method" required>
+                <select id="ship" class="form-control" name="shipment_method" required>
                     <?php
                     $sql = "SELECT * FROM order_shipment";
                     $stmt = $conn->prepare($sql);
@@ -107,11 +110,11 @@ if (isset($_SESSION['user_id'])) {
                 </select>
         </div>
                     
-        <div class="form-group">
+        <div class="form-group" id="stret">
             <label for="ulica">Ulica</label>
             <input type="text" class="form-control" name="ulica" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="numb">
             <label for="numer">Numer domu/mieszkania/paczkomatu</label>
             <input type="numer" class="form-control" name="numer" required>
         </div>
@@ -135,13 +138,13 @@ if (isset($_SESSION['user_id'])) {
                 ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Kup</button>
+        <button type="submit" class="btn btn-primary btn-block" id="but">Kup</button>
     </form>
 </div>
 
 </body>
 
-<script src='js/shop.js'></script>
+<script src='js/buy.js'></script>
 </html>
 <?php
 require_once("footer.php");

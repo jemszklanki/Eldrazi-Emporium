@@ -30,6 +30,7 @@ $cart = $_SESSION['cart'] ?? [];
             <?php endforeach; ?>
         </tbody>
     </table>
+    <a href='buy.php'>Kup</a>
     <div id='ajax-ret'></div>
 <?php else: ?>
     <p>Twój koszyk jest pusty.</p>
