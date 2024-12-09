@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 01:47 AM
+-- Generation Time: Dec 09, 2024 at 05:07 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -47,7 +47,7 @@ INSERT INTO `cards` (`name`, `expansion_id`, `condition_id`, `foil_id`, `languag
 ('dreadmaw', 1, 2, 1, 1, '', 1.00, 2, NULL),
 ('sda', 1, 1, 1, 1, '1', 1.00, 1, NULL),
 ('ss', 2, 1, 1, 1, '', 1.00, 1, NULL),
-('storm crow', 1, 2, 4, 9, 'siea', 23.00, 1, NULL),
+('storm crow', 1, 2, 4, 9, 'siea', 23.50, 1, ''),
 ('test', 1, 1, 1, 1, 'damaged', 1.00, 2, NULL),
 ('tet', 1, 1, 1, 1, '', 1.19, 1, NULL);
 
@@ -72,7 +72,11 @@ INSERT INTO `cart_log` (`user_id`, `item_name`, `quantity`, `id`) VALUES
 (4, 'dreadmaw', 2, 15),
 (4, 'sda', 1, 16),
 (4, 'storm crow', 1, 17),
-(4, 'test', 2, 18);
+(4, 'test', 2, 18),
+(8, 'dreadmaw', 2, 19),
+(8, 'sda', 1, 20),
+(8, 'storm crow', 1, 21),
+(8, 'test', 2, 22);
 
 -- --------------------------------------------------------
 
@@ -180,6 +184,98 @@ INSERT INTO `languages` (`id`, `language_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `street` varchar(80) NOT NULL,
+  `number` varchar(10) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `shipment_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `order_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_cards`
+--
+
+CREATE TABLE `order_cards` (
+  `order_id` int(11) NOT NULL,
+  `card_name` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_payment`
+--
+
+CREATE TABLE `order_payment` (
+  `payment_id` int(11) NOT NULL,
+  `payment_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_payment`
+--
+
+INSERT INTO `order_payment` (`payment_id`, `payment_name`) VALUES
+(1, 'blik'),
+(2, 'karta'),
+(3, 'przelew');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_shipment`
+--
+
+CREATE TABLE `order_shipment` (
+  `shipment_id` int(11) NOT NULL,
+  `shipment_name` varchar(255) NOT NULL,
+  `shipment_price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_shipment`
+--
+
+INSERT INTO `order_shipment` (`shipment_id`, `shipment_name`, `shipment_price`) VALUES
+(1, 'kurier', 25.50),
+(2, 'poczta', 13.00),
+(3, 'odbiór osobisty', 0.00),
+(4, 'paczkomat', 7.99);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_status`
+--
+
+CREATE TABLE `order_status` (
+  `status_id` int(11) NOT NULL,
+  `status_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_status`
+--
+
+INSERT INTO `order_status` (`status_id`, `status_name`) VALUES
+(1, 'przygotowana'),
+(2, 'wysłana'),
+(3, 'odebrana');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `users`
 --
 
@@ -200,10 +296,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`, `verified`, `token`) VALUES
 (2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0, 0, ''),
-(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 1, ''),
+(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 0, ''),
 (5, 'kupasrupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91'),
 (6, 'jemszklanki', '$2y$10$hcczb3vscth46w6Dkm0VZ.89Hjics.ZYiytrTwC.HOkdmsrAF8AUy', 'helok@gmail.com', '2024-12-05 16:49:42', 0, 0, '5bcd97f84577193c94e4b13d690b8c91'),
-(7, 'sdgfdhdf', '$2y$10$dgwORIRkg5Lae6MoIEs9aeCCtRrYT2DzlNGXcBn4Zq6Bgij7U5Tkq', 'dfgjdfolgj@gmail.com', '2024-12-05 16:50:23', 0, 1, '');
+(7, 'sdgfdhdf', '$2y$10$dgwORIRkg5Lae6MoIEs9aeCCtRrYT2DzlNGXcBn4Zq6Bgij7U5Tkq', 'dfgjdfolgj@gmail.com', '2024-12-05 16:50:23', 0, 1, ''),
+(8, 'Ernest', '$2y$10$c4oFcfSqIhXxP4o6pX00VudSJx2jvMpK5Owv3PGHRYFMVDrgtDpU.', 'ernestkos11@gmail.com', '2024-12-09 01:51:54', 1, 1, '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -217,7 +314,8 @@ ALTER TABLE `cards`
   ADD KEY `expansion_id` (`expansion_id`),
   ADD KEY `condition_id` (`condition_id`),
   ADD KEY `foil_id` (`foil_id`),
-  ADD KEY `language_id` (`language_id`);
+  ADD KEY `language_id` (`language_id`),
+  ADD KEY `price` (`price`);
 
 --
 -- Indeksy dla tabeli `cart_log`
@@ -252,6 +350,40 @@ ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `status_id` (`status_id`,`shipment_id`,`payment_id`),
+  ADD KEY `shipment_id` (`shipment_id`),
+  ADD KEY `payment_id` (`payment_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeksy dla tabeli `order_cards`
+--
+ALTER TABLE `order_cards`
+  ADD KEY `order_id` (`order_id`,`card_name`);
+
+--
+-- Indeksy dla tabeli `order_payment`
+--
+ALTER TABLE `order_payment`
+  ADD PRIMARY KEY (`payment_id`);
+
+--
+-- Indeksy dla tabeli `order_shipment`
+--
+ALTER TABLE `order_shipment`
+  ADD PRIMARY KEY (`shipment_id`);
+
+--
+-- Indeksy dla tabeli `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`status_id`);
+
+--
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -267,7 +399,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart_log`
 --
 ALTER TABLE `cart_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `conditions`
@@ -297,7 +429,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -318,6 +450,21 @@ ALTER TABLE `cards`
 ALTER TABLE `cart_log`
   ADD CONSTRAINT `cart_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `cart_log_ibfk_2` FOREIGN KEY (`item_name`) REFERENCES `cards` (`name`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `order_status` (`status_id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipment_id`) REFERENCES `order_shipment` (`shipment_id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`payment_id`) REFERENCES `order_payment` (`payment_id`),
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `order_cards`
+--
+ALTER TABLE `order_cards`
+  ADD CONSTRAINT `order_cards_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
