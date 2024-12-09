@@ -8,9 +8,13 @@ comboBox.addEventListener("input", ()=>{
     {
         street.classList.add("hidden");
         number.classList.add("hidden");
+        street.required = false;
+        number.required = false;
     } else {
         street.classList.remove("hidden");
         number.classList.remove("hidden");
+        street.required = true;
+        number.required = true;
     }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
