@@ -14,7 +14,7 @@ $defaults_query = mysqli_query($conn,"select * from cards where name='{$_GET['in
 $defaults_query_result = @mysqli_fetch_array($defaults_query);
 ?>
 <form method="POST" action="panels/karty_edit.php?index=<?php echo $_GET['index']?>">
-    <label>Edytuj <?php echo $_GET['index']?></label><br>
+    <h3>Edytuj <?php echo $_GET['index']?></h3><br>
     <label>Dodatek</label><br>
     <select name="dodatek" required>
         <?php

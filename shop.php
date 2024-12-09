@@ -37,7 +37,7 @@ require_once("navbar.php");
     ?>
 </select><br>
 <br>
-<table>
+<table class="col9">
     <thead>
         <tr>
             <th>Nazwa</th>

@@ -10,7 +10,7 @@ $cart = $_SESSION['cart'] ?? [];
 ?>
 <h1>Twój Koszyk</h1>
 <?php if (!empty($cart)): ?>
-    <table>
+    <table class="col3">
         <thead>
             <tr>
                 <th>Przedmiot</th>

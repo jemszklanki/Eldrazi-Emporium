@@ -19,7 +19,7 @@ if(isset($_GET['index'])){
 
 ?>
 <form method="POST" action="panels/dodatki_edit.php">
-    <label>Edytuj <?php echo $dodatek ?></label><br>
+    <h3>Edytuj <?php echo $dodatek ?></h3><br>
     <input type="text" name="nazwa" placeholder = "<?php echo $dodatek ?>" required><br>
     <input type="hidden" name="index" value="<?php echo $_GET['index']?>">
     <input type="submit"><br>
