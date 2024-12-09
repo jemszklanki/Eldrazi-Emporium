@@ -36,12 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Usuń nadwyżkę z `cart_log`, jeśli w tabeli `cards` jest mniej elementów
                 $cleanupSql = "
                     UPDATE cart_log
-                    JOIN cards ON cart_log.card_id = cards.card_id 
+                    JOIN cards ON cart_log.item_name = cards.name
                     SET cart_log.quantity = cards.quantity
                     WHERE cart_log.quantity > cards.quantity;
                 ";
                 $cleanupStmt = $conn->prepare($cleanupSql);
-                $cleanupStmt->bind_param("i", $userId);
                 $cleanupStmt->execute();
                 $cleanupStmt->close();
 
