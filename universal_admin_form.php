@@ -91,6 +91,15 @@ if(isset($_GET["n"])){
         case 53:
             require_once("panels/dostawy_del.php");
             break;
+        case 61:
+            require_once("panels/platnosci_add.php");
+            break;
+        case 62:
+            require_once("panels/platnosci_edit.php");  
+            break;
+        case 63:
+            require_once("panels/platnosci_del.php");
+            break;
         default:
             header("Location: index.php");
             die;

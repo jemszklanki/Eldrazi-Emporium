@@ -52,4 +52,4 @@ function formToSession(n){
     }
 }
 
-getForm(1); //  Default to form z kartami
+getForm(1); //  Default to form z kartami, moze zrob zeby byl ostatni
