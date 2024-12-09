@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 05:07 AM
+-- Generation Time: Dec 10, 2024 at 12:38 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -44,12 +44,13 @@ CREATE TABLE `cards` (
 --
 
 INSERT INTO `cards` (`name`, `expansion_id`, `condition_id`, `foil_id`, `language_id`, `notes`, `price`, `quantity`, `image`) VALUES
-('dreadmaw', 1, 2, 1, 1, '', 1.00, 2, NULL),
-('sda', 1, 1, 1, 1, '1', 1.00, 1, NULL),
-('ss', 2, 1, 1, 1, '', 1.00, 1, NULL),
-('storm crow', 1, 2, 4, 9, 'siea', 23.50, 1, ''),
-('test', 1, 1, 1, 1, 'damaged', 1.00, 2, NULL),
-('tet', 1, 1, 1, 1, '', 1.19, 1, NULL);
+('Demonic Tutor', 5, 1, 1, 1, '', 15.00, 1, 'tutor'),
+('Dockside Extortionist', 4, 1, 3, 8, '', 30.00, 1, 'dockside'),
+('Elesh Norn', 1, 3, 1, 3, '', 1.00, 1, 'elesh'),
+('Griselbrand', 1, 5, 1, 1, 'Signed', 1.00, 1, 'griselbrand'),
+('Nicol Bolas', 2, 6, 1, 1, 'Coffee stains', 1.00, 1, 'bolas'),
+('Sheoldred', 1, 6, 14, 1, 'Scratched surface', 50.00, 1, 'sheoldred'),
+('Test', 1, 4, 7, 1, 'Siema', 12.00, 1, 'sieeema');
 
 -- --------------------------------------------------------
 
@@ -69,14 +70,10 @@ CREATE TABLE `cart_log` (
 --
 
 INSERT INTO `cart_log` (`user_id`, `item_name`, `quantity`, `id`) VALUES
-(4, 'dreadmaw', 2, 15),
-(4, 'sda', 1, 16),
-(4, 'storm crow', 1, 17),
-(4, 'test', 2, 18),
-(8, 'dreadmaw', 2, 19),
-(8, 'sda', 1, 20),
-(8, 'storm crow', 1, 21),
-(8, 'test', 2, 22);
+(4, 'Elesh Norn', 1, 19),
+(4, 'Griselbrand', 1, 20),
+(4, 'Sheoldred', 1, 21),
+(4, 'Test', 1, 22);
 
 -- --------------------------------------------------------
 
@@ -118,7 +115,9 @@ CREATE TABLE `expansions` (
 
 INSERT INTO `expansions` (`id`, `expansion_name`) VALUES
 (1, 'EX4'),
-(2, 'EX2');
+(2, 'EX2'),
+(4, 'MH4'),
+(5, 'IXR');
 
 -- --------------------------------------------------------
 
@@ -248,10 +247,16 @@ CREATE TABLE `order_shipment` (
 --
 
 INSERT INTO `order_shipment` (`shipment_id`, `shipment_name`, `shipment_price`) VALUES
-(1, 'kurier', 25.50),
+(1, 'kurieraaa', 2.00),
 (2, 'poczta', 13.00),
 (3, 'odbiór osobisty', 0.00),
-(4, 'paczkomat', 7.99);
+(4, 'paczkomat', 7.99),
+(6, 'kuriere', 25.00),
+(7, 'kurier', 25.00),
+(8, 'kuriere', 25.50),
+(9, 'kuriere', 25.50),
+(10, 'poczt', 13.00),
+(11, 'paczkomataa', 7.99);
 
 -- --------------------------------------------------------
 
@@ -276,6 +281,27 @@ INSERT INTO `order_status` (`status_id`, `status_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `contents` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `contents`) VALUES
+(3, 'Czy Griselbrand jest słusznie zbanowany?', '<img src=\"img/griselbrand.jpg\" style=\"float:left; width: 200px;\" alt=\"griselbrand\" onerror=\"this.src=\"img/no_preview.png\">\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur quis tellus nec tincidunt. Nam at dui vitae dui imperdiet aliquam. Cras urna arcu, finibus sit amet massa at, laoreet cursus sapien. Integer mattis lorem vulputate mauris porta bibendum. Morbi semper eleifend enim, a blandit ipsum egestas ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque a cursus sem, eu commodo nunc. Praesent ante ex, tristique et porta finibus, mollis vitae ligula. Sed lobortis lacus nec nibh consectetur convallis.\r\n\r\nMorbi mollis felis non velit malesuada faucibus. Aliquam volutpat condimentum ipsum nec placerat. Morbi nec fermentum leo. Praesent accumsan maximus sapien, ut facilisis massa tincidunt vel. Aliquam ultricies scelerisque rutrum. Quisque nec nisi eu enim aliquam luctus vitae sit amet ipsum. '),
+(4, 'Czy Elesh Norn jest \"fun\"?', '<img src=\"img/elesh.jpg\" style=\"float:left; width: 200px;\" alt=\"griselbrand\" onerror=\"this.src=\"img/no_preview.png\">\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur quis tellus nec tincidunt. Nam at dui vitae dui imperdiet aliquam. Cras urna arcu, finibus sit amet massa at, laoreet cursus sapien. Integer mattis lorem vulputate mauris porta bibendum. Morbi semper eleifend enim, a blandit ipsum egestas ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque a cursus sem, eu commodo nunc. Praesent ante ex, tristique et porta finibus, mollis vitae ligula. Sed lobortis lacus nec nibh consectetur convallis.'),
+(5, 'O banach w formacie Commander', '<img src=\"img/dockside.jpg\" style=\"float:left; width: 200px;\" alt=\"griselbrand\" onerror=\"this.src=\"img/no_preview.png\">\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur quis tellus nec tincidunt. Nam at dui vitae dui imperdiet aliquam. Cras urna arcu, finibus sit amet massa at, laoreet cursus sapien. Integer mattis lorem vulputate mauris porta bibendum. Morbi semper eleifend enim, a blandit ipsum egestas ut. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque a cursus sem, eu commodo nunc. Praesent ante ex, tristique et porta finibus, mollis vitae ligula. Sed lobortis lacus nec nibh consectetur convallis.\r\nSed a sagittis erat, eu rhoncus arcu. Duis rutrum ex ex, a eleifend nibh auctor nec. Donec feugiat elementum lectus ut semper. Donec rhoncus et erat consequat gravida. Etiam pretium justo quis malesuada vulputate. Nunc laoreet ante non ultrices fermentum. Pellentesque aliquet quam vel gravida euismod. Donec ultricies vitae massa nec varius. Nulla maximus sit amet dui ut vehicula. Duis sit amet pretium tortor. Nullam aliquam aliquam justo in feugiat. Nulla ac sollicitudin neque, vitae cursus massa. Sed et ante molestie, molestie felis vel, malesuada mi. ');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `users`
 --
 
@@ -295,12 +321,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `admin`, `verified`, `token`) VALUES
-(2, 'srakazdupy', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'sraka@gmail.com', '2024-10-03 19:10:05', 0, 0, ''),
-(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 0, ''),
-(5, 'kupasrupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91'),
+(2, 'makapaka', '$2y$10$nJfxgspX//UJKMFpeWBp0uF5YdpoBZMRi0m8ybfzwLsL9vu2lJzbm', 'maka@gmail.com', '2024-10-03 19:10:05', 1, 1, ''),
+(4, 'fmax12', '$2y$10$DInHjGdSCC4BGOXzrXWB5O/C7aOWVQPHgs1jCo.98yKMhFAsJk3k6', '12@gmail.com', '2024-11-24 18:13:31', 1, 1, ''),
+(5, 'kupa', '$2y$10$MvwJtkevQzbS2rhmiW/Z.eqyU9984XqUJiHdi4mpEpvqy6nJ8XZg2', 'u20_maksymmnich@zsp1.siedlce.pl', '2024-12-02 23:03:58', 0, 0, 'e1e55aae1d0b42ef7a09adea73b59f91'),
 (6, 'jemszklanki', '$2y$10$hcczb3vscth46w6Dkm0VZ.89Hjics.ZYiytrTwC.HOkdmsrAF8AUy', 'helok@gmail.com', '2024-12-05 16:49:42', 0, 0, '5bcd97f84577193c94e4b13d690b8c91'),
-(7, 'sdgfdhdf', '$2y$10$dgwORIRkg5Lae6MoIEs9aeCCtRrYT2DzlNGXcBn4Zq6Bgij7U5Tkq', 'dfgjdfolgj@gmail.com', '2024-12-05 16:50:23', 0, 1, ''),
-(8, 'Ernest', '$2y$10$c4oFcfSqIhXxP4o6pX00VudSJx2jvMpK5Owv3PGHRYFMVDrgtDpU.', 'ernestkos11@gmail.com', '2024-12-09 01:51:54', 1, 1, '');
+(7, 'sdgfdhdf', '$2y$10$dgwORIRkg5Lae6MoIEs9aeCCtRrYT2DzlNGXcBn4Zq6Bgij7U5Tkq', 'dfgjdfolgj@gmail.com', '2024-12-05 16:50:23', 0, 1, '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -384,6 +409,12 @@ ALTER TABLE `order_status`
   ADD PRIMARY KEY (`status_id`);
 
 --
+-- Indeksy dla tabeli `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
@@ -411,7 +442,7 @@ ALTER TABLE `conditions`
 -- AUTO_INCREMENT for table `expansions`
 --
 ALTER TABLE `expansions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `foils`
@@ -426,10 +457,40 @@ ALTER TABLE `languages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_payment`
+--
+ALTER TABLE `order_payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `order_shipment`
+--
+ALTER TABLE `order_shipment`
+  MODIFY `shipment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `order_status`
+--
+ALTER TABLE `order_status`
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

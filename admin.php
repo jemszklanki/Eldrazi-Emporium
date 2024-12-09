@@ -14,6 +14,9 @@ if(isset($_SESSION['admin'])){
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(7)">Posty</a>
+                </li>
+                <li class="nav-item nav-links">
                     <a class="nav-link" href="#" onclick="getForm(1)">Karty</a>
                 </li>
                 <li class="nav-item nav-links">

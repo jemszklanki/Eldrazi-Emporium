@@ -46,6 +46,9 @@ if(isset($_GET["n"])){
         case 63:
             require_once("queries/platnosci_del_query.php");
             break;   
+        case 73:
+            require_once("queries/posts_del_query.php");
+            break;   
         default:
             die;
     }
