@@ -151,7 +151,7 @@
     $mail->addAddress($email);
 
     $mail->IsHTML(true);
-    $mail->Subject = "Purchase Verification Eldrazi Emporium";
+    $mail->Subject = "Purchase Eldrazi Emporium";
     ?>
 
     <?php
@@ -159,6 +159,7 @@
     // Treść maila
     $email_text = "
         <h2>Dziękujemy za zakupy w naszym sklepie</h2>
+        <br/> $date
         <br/>Dowóz: $shipment_name
         <br/>Cena dowozu: $shipment_price zł
         $ulicatext
@@ -176,21 +177,25 @@
     
     $mail->Body = $email_template;
      try {
-         $mail->send();
+         //$mail->send();
      } catch (Exception $e) {
          echo "Wiadomość nie mogła zostać wysłana: {$mail->ErrorInfo}";
          die;
      }
-
+    echo$user_id . " " .  $date . " " . $ulica . " " . $numer . " " . '1' . " " . $shipment_id . " " . $payment_id . " " . $totalPrice;
     
      if (isset($_SESSION['user_id'])) {
-        $stmt = $conn->prepare("INSERT INTO `orders`(`user_id`, `date`, `street`, `number`, `status_id`, `shipment_id`, `payment_id`, `order_price`) VALUES ('$user_id','$date','$ulica','$numer','1','$shipment_id','$payment_id','$totalPrice')");
+        $sql = "INSERT INTO orders (user_id, street, number, shipment_id, payment_id, order_price) VALUES (?,?,?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("issiis", $user_id,$ulica,$numer,$shipment_id,$payment_id,$totalPrice);
+        $stmt->execute();
      } else {
         //bez zalogowania
-        $stmt = $conn->prepare("INSERT INTO `orders`(`date`, `street`, `number`, `status_id`, `shipment_id`, `payment_id`, `order_price`) VALUES ('$date','$ulica','$numer','1','$shipment_id','$payment_id','$totalPrice')");
+        $stmt = $conn->prepare("INSERT INTO `orders`(`street`, `number`, `shipment_id`, `payment_id`, `order_price`) VALUES ('$ulica','$numer','$shipment_id','$payment_id','$totalPrice')");
      }
         if ($stmt->execute()){
              //header("Location: registered.php");
+             echo"super";
              //exit(); 
         } else {
             $error_msg = "Error: " . $stmt->error;
