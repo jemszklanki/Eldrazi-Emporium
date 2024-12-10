@@ -56,13 +56,13 @@ require_once("navbar.php");
             $query = mysqli_query($conn,"SELECT cards.image as image, cards.name as 'name', conditions.condition_name as 'condition_id', expansions.expansion_name as 'expansion_id', foils.foil_name as 'foil_id', languages.language_name as 'language_id', cards.notes as 'notes', cards.price as 'price', cards.quantity as 'quantity' FROM cards JOIN conditions on cards.condition_id=conditions.id join expansions on cards.expansion_id=expansions.id join foils on cards.foil_id=foils.id join languages on cards.language_id=languages.id;"); 
             while ($wynik = @mysqli_fetch_array($query)) { 
                 echo "<tr>
-                    <td onmouseover='showPreview(".'"'.$wynik["image"].'"'.", event)' onmouseout='hidePreview()'>".$wynik["name"]."</td>
+                    <td onmouseover='showPreview(".'"'.$wynik["image"].'"'.", event)' onmouseout='hidePreview()'><a href='product.php?index=".$wynik["name"]."'>".$wynik["name"]."</a></td>
                     <td>".$wynik["expansion_id"]."</td>
                     <td>".$wynik["condition_id"]."</td>
                     <td>".$wynik["foil_id"]."</td>
                     <td>".$wynik["language_id"]."</td>
                     <td>".$wynik["notes"]."</td>
-                    <td>".$wynik["price"]."</td>
+                    <td>".$wynik["price"]."zł</td>
                     <td>".$wynik["quantity"]."</td>
                     <td><button onclick='addToCart(".'"'.$wynik["name"].'"'.", 1)'>Dodaj do koszyka</button></td>
                     </tr>";

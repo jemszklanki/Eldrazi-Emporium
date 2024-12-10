@@ -92,8 +92,19 @@ button:active{
 .hidden {
     display: none;
 }
+.card-site {
+    min-height: 60vh;
+}
+.card-site img {
+    float: left;
+    width: 250px;
+    margin: 15px;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
 .custom-paragraph {
     min-height: 60vh;
+    text-align: justify;
 }
 .custom-paragraph img {
     float: left;
@@ -107,4 +118,7 @@ button:active{
     transition: opacity 0.2s ease-in-out;
     border: 1px solid gray;
     border-radius: 7px;
+}
+a {
+    color: black;
 }
