@@ -14,7 +14,7 @@ Javascript:
     - JQuery i popper zimportowane do poprawnego działania bootstrapa
 
     - Plik admin_panel.js:
-        - Obsługuje wyświetlanie formularzy i wykonywanie kwerend w panelu panelu admina 
+        - Obsługuje wyświetlanie formularzy AJAX-em i wykonywanie kwerend w panelu panelu admina 
     
     - Plik shop.js:
         - Wyszukiwanie produktów na stronie sklepu
@@ -22,6 +22,9 @@ Javascript:
 
     Plik buy.js:
         - Pomaga w obsłudze formularza zakupu
+
+    Plik user_panel.js:
+        - Obsługuje AJAX w panelu użytkownika
 
 PHP:
     - panels:
@@ -57,6 +60,10 @@ PHP:
         - Wyświetla karty z bazy danych
         - Możliwość filtrowania wyników bez odświeżania strony dzięki technologii AJAX
         - Możliwość dodania kart do koszyka
+        - Każda karta ma podstronę product.php:
+            - Wyświetla parametry karty
+            - Możliwość dodania do koszyka
+            - większy obrazek
 
     - admin.php:
         - Panel administratora
@@ -75,6 +82,10 @@ PHP:
         - Panel pozwala na tworzenie postów na stronie głównej
         - Panel pozwala na tworzenie prostych podstron
     
+    - account.php:
+        - Panel użytkownika
+        - Korzysta z user_panel.js i user_orders.php aby wyświetlać zamówienia
+
     - custom.php:
         - Służy do wyświetlania podstron tworzonych z poziomu panelu admina
 

@@ -24,12 +24,12 @@
                     </li>';
                 }
                 ?>
-                <!-- Zarządzanie kontem
+                <!-- Zarządzanie kontem -->
                 <?php
-                // if(isset($_SESSION['user_id'])){
-                //     echo '<li class="nav-item nav-links"> <a class="nav-link" href="account.php">Konto</a> </li>';
-                // }
-                ?> -->
+                if(isset($_SESSION['user_id'])){
+                    echo '<li class="nav-item nav-links"> <a class="nav-link" href="account.php">Konto</a> </li>';
+                }
+                ?>
                 <?php
                     $query = "SELECT * FROM sites";
                     $posts = mysqli_query($conn, $query);
