@@ -101,6 +101,30 @@ PHP:
     - logout.php:
         - Wylogowuje ze strony.
 
+    -cart.php:
+        - Wyświetla wszystkie produkty z sesji i daje możliwość usunięcia innych
+
+    -confirm.php:
+        - Automatycznie weryfikuje użytkownika przy pomocy wygenerowanego linku wysłanego na maila podczas register.php
+
+    -forgotpass.php:
+        - Wysyła na maila linka do resetu hasła
+
+    -registered.php:
+        - Krótka informacja o tym że konto powinno zostać zweryfikowane mailem
+
+    -reset.php:
+        - Pobiera wygenerowanego linka z maila żeby zmienić hasło
+    
+    -changedpass.php
+        - Krótka informaca o zmianie hasła
+
+    -resetonmail.php
+        -któtka informacja o wysłaniu linka do weryikacji na maila
+
+    -verified.php
+        -krótka informacja o pomyślnym zweryfikowaniu konta mailem
+
 Folder misc:
     - dokumentacja
     - zrzut bazy danych
@@ -109,14 +133,10 @@ Folder misc:
     TODO: 
 
     account
-    cart 
-    confirm
-    forgotpass
-    registered
-    reset 
-    changedpass
-    resetonmail
-    verified
     
-    + foldery confirm i PHPmailer
+PHPmailer:
+    -użyty podczas rejestracji, resecie hasła i zamówieniach
+    -wysyła maila ze stroną wygenerowaną pod dane potrzeby
+    -korzysta z serwera smtp postawionego na własnym gmailu
+    -
 
