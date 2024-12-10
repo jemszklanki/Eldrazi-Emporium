@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <h1>Twoje zamówienie</h1>
 <?php if (!empty($cart)): ?>
-    <table>
+    <table class="col3">
         <thead>
             <tr>
                 <th>Przedmiot</th>

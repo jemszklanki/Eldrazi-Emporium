@@ -52,7 +52,7 @@
         $stmt->close();
         } else {
         $email = $_SESSION['temail'];
-        //unset($_SESSION['temail']);
+        unset($_SESSION['temail']);
         }
 
         //shipment nazwa i cena
@@ -72,18 +72,18 @@
        
         $stmt->close();
         
-        //unset($_SESSION['shipment_method']);
+        unset($_SESSION['shipment_method']);
     }
         // ulica i numer o ile są
     if (isset($_SESSION['ulica'])) {
         $ulica = $_SESSION['ulica'];
         $ulicatext= "<br/>Adres: " . $ulica;
-        //unset($_SESSION['ulica']);
+        unset($_SESSION['ulica']);
     }
     if (isset($_SESSION['numer'])) {
         $numer= $_SESSION['numer'];
         $numertext = " " . $numer;
-        //unset($_SESSION['numer']);
+        unset($_SESSION['numer']);
     }
     
         //metoda płatności
@@ -98,13 +98,14 @@
         } else {
             $payment_name = "error";
         }
-        //unset($_SESSION['payment_method']);
+        $stmt->close();
+        unset($_SESSION['payment_method']);
     }
         //całkowita cena
     if (isset($_SESSION['totalPrice'])) {
         $totalPrice = $_SESSION['totalPrice'];
-        //unset($_SESSION['totalPrice']);
-        //unset($_SESSION['cardsPrice']);
+        unset($_SESSION['totalPrice']);
+        unset($_SESSION['cardsPrice']);
     }
 
         //data i godzina
@@ -177,29 +178,45 @@
     
     $mail->Body = $email_template;
      try {
-         //$mail->send();
+         $mail->send();
      } catch (Exception $e) {
          echo "Wiadomość nie mogła zostać wysłana: {$mail->ErrorInfo}";
          die;
-     }
-    echo$user_id . " " .  $date . " " . $ulica . " " . $numer . " " . '1' . " " . $shipment_id . " " . $payment_id . " " . $totalPrice;
+     };
     
-     if (isset($_SESSION['user_id'])) {
-        $sql = "INSERT INTO orders (user_id, street, number, shipment_id, payment_id, order_price) VALUES (?,?,?,?,?,?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issiis", $user_id,$ulica,$numer,$shipment_id,$payment_id,$totalPrice);
-        $stmt->execute();
-     } else {
-        //bez zalogowania
-        $stmt = $conn->prepare("INSERT INTO `orders`(`street`, `number`, `shipment_id`, `payment_id`, `order_price`) VALUES ('$ulica','$numer','$shipment_id','$payment_id','$totalPrice')");
-     }
+     
+        $query = "INSERT INTO `orders`(`user_id`, `date`, `street`, `number`, `status_id`, `shipment_id`, `payment_id`, `order_price`) VALUES (?, NOW(), ?, ?, 1, ?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . $$conn->error);
+        }
+        
+        $stmt->bind_param("issiis", $user_id, $ulica, $numer, $shipment_id, $payment_id, $totalPrice);
+        
+        if ($stmt->execute()) {
+            echo "Zamówienie zostało dodane.";
+        } else {
+            echo "Błąd: " . $stmt->error;
+        }
+        
         if ($stmt->execute()){
-             //header("Location: registered.php");
-             echo"super";
-             //exit(); 
+            foreach ($cart as $itemName => $quantity){
+                $itemNameSafe = is_array($itemName) ? 'Nieprawidłowa nazwa' : htmlspecialchars($itemName);
+                if ($itemNameSafe !== 'Nieprawidłowa nazwa') {
+                    $stmt = $conn->prepare("UPDATE cards SET quantity = quantity - ? WHERE name = ?");
+                    if ($stmt) {
+                        $stmt->bind_param("is", $quantity, $itemName);
+                        $stmt->execute();
+                        $stmt->close();
+                    } else {
+                        echo "Błąd przygotowania zapytania: " . $conn->error;
+                    }
+                };
+            };
+             unset($_SESSION['cart']);
+             header("Location: index.php");
+             exit(); 
         } else {
             $error_msg = "Error: " . $stmt->error;
-         }
-     $stmt->close();
-
+         };
 ?>

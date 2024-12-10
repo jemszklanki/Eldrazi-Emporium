@@ -64,7 +64,7 @@ require_once("navbar.php");
                     <td>".$wynik["notes"]."</td>
                     <td>".$wynik["price"]."</td>
                     <td>".$wynik["quantity"]."</td>
-                    <td><button onclick='addToCart(".'"'.$wynik["name"].'"'.", ".$wynik["quantity"].")'>Dodaj do koszyka</button></td>
+                    <td><button onclick='addToCart(".'"'.$wynik["name"].'"'.", 1)'>Dodaj do koszyka</button></td>
                     </tr>";
             }
         ?>
