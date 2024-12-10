@@ -92,6 +92,14 @@ button:active{
 .hidden {
     display: none;
 }
+.custom-paragraph {
+    min-height: 60vh;
+}
+.custom-paragraph img {
+    float: left;
+    width: 250px;
+    margin: 15px;
+}
 #preview {
     width: 150px;
     height: 210px;

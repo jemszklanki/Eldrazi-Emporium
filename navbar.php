@@ -30,6 +30,13 @@
                 //     echo '<li class="nav-item nav-links"> <a class="nav-link" href="account.php">Konto</a> </li>';
                 // }
                 ?> -->
+                <?php
+                    $query = "SELECT * FROM sites";
+                    $posts = mysqli_query($conn, $query);
+                    while ($wynik = @mysqli_fetch_array($posts)) {
+                        echo '<li class="nav-item nav-links"> <a class="nav-link" href="custom.php?index='.$wynik['id'].'">'.$wynik['title'].'</a> </li>';
+                    }
+                ?>
                 <!-- Admin panel -->
                 <?php
                 if(isset($_SESSION['admin'])){

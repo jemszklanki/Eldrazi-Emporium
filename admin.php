@@ -17,6 +17,9 @@ if(isset($_SESSION['admin'])){
                     <a class="nav-link" href="#" onclick="getForm(7)">Posty</a>
                 </li>
                 <li class="nav-item nav-links">
+                    <a class="nav-link" href="#" onclick="getForm(8)">Podstrony</a>
+                </li>
+                <li class="nav-item nav-links">
                     <a class="nav-link" href="#" onclick="getForm(1)">Karty</a>
                 </li>
                 <li class="nav-item nav-links">

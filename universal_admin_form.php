@@ -55,6 +55,9 @@ if(isset($_GET["n"])){
         case 7:
             require_once("panels/posts.php");
             break;
+        case 8:
+            require_once("panels/sites.php");
+            break;
         case 11:
             require_once("panels/karty_add.php");
             break;
@@ -111,6 +114,15 @@ if(isset($_GET["n"])){
             break;
         case 73:
             require_once("panels/posts_del.php");
+            break;
+        case 81:
+            require_once("panels/sites_add.php");
+            break;
+        case 82:
+            require_once("panels/sites_edit.php");  
+            break;
+        case 83:
+            require_once("panels/sites_del.php");
             break;
         default:
             header("Location: index.php");
