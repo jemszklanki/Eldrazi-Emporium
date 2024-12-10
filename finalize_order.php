@@ -193,12 +193,6 @@
         
         $stmt->bind_param("issiis", $user_id, $ulica, $numer, $shipment_id, $payment_id, $totalPrice);
         
-        if ($stmt->execute()) {
-            echo "Zamówienie zostało dodane.";
-        } else {
-            echo "Błąd: " . $stmt->error;
-        }
-        
         if ($stmt->execute()){
             foreach ($cart as $itemName => $quantity){
                 $itemNameSafe = is_array($itemName) ? 'Nieprawidłowa nazwa' : htmlspecialchars($itemName);
