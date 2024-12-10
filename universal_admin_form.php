@@ -31,6 +31,11 @@ Przykłady:
 13 - usuwa wybraną kartę
 21 - formularz do dodania dodatku
 */
+if($_GET["n"] < 10){
+    $_SESSION['lastPanel'] = $_GET["n"];
+}else{
+    $_SESSION['lastPanel'] = floor($_GET["n"]/10);
+}
 
 if(isset($_GET["n"])){
     switch($_GET["n"]){

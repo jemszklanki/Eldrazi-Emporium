@@ -6,6 +6,7 @@ CSS:
         - Style wszytkich tabel i przycisków na stronie
         - Style baneru i navbarów
         - Klasy i style potrzebne do działania podglądu kart na stronie sklepu
+        - Drobne klasy dla własnych podstron
     - folder img:
         - Folder zawiera obrazki wykorzystywane na stronie
 
@@ -18,6 +19,9 @@ Javascript:
     - Plik shop.js:
         - Wyszukiwanie produktów na stronie sklepu
         - Podgląd zdjęć kart
+
+    Plik buy.js:
+        - Pomaga w obsłudze formularza zakupu
 
 PHP:
     - panels:
@@ -67,7 +71,12 @@ PHP:
             - Ułatwia potencjalną rozbudowę strony
             - kwerendy(folder queries) są zabezpieczone przed uruchomieniem przez użytkownika
             niebędącego adminem.
-        - Panel pozwala na modyfikację, usuwanie i dodawanie kart, użytkowników i dodatków.
+        - Panel pozwala na modyfikację, usuwanie i dodawanie kart, dodatków, zamówień, opcji wysyłki i płatności.
+        - Panel pozwala na tworzenie postów na stronie głównej
+        - Panel pozwala na tworzenie prostych podstron
+    
+    - custom.php:
+        - Służy do wyświetlania podstron tworzonych z poziomu panelu admina
 
     - register.php:
         - Służy do rejestracji konta na stronie

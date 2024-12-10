@@ -51,5 +51,13 @@ function formToSession(n){
         //  w sesji wartości z formów, jak coś to skrypty od tego rób w folderze 'misc'
     }
 }
-
-getForm(1); //  Default to form z kartami, moze zrob zeby byl ostatni
+let xmlhttp = new XMLHttpRequest();
+let lastPanel;
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        lastPanel = this.responseText;
+        getForm(lastPanel); //  Default to form z kartami, moze zrob zeby byl ostatni
+    }
+};
+xmlhttp.open("GET", "queries/getlastpanel.php", true);
+xmlhttp.send();
