@@ -40,9 +40,13 @@
                 ?>
                 <!-- Logout -->
                 <?php
-                if(isset($_SESSION['user_id'])){
-                    echo '<li class="nav-item nav-links"> <a class="nav-link" href="logout.php">Wyloguj</a> </li>';
-                    echo  '<li> <span class="nav-link witaj">Witaj '.$_SESSION['username'].'</span></li>';
+                if (isset($_SESSION['user_id'])) {
+                    echo '<li class="nav-item nav-links"> 
+                            <a class="nav-link" href="logout.php" onclick="return confirm(\'Czy na pewno chcesz się wylogować?\');">Wyloguj</a>
+                          </li>';
+                    echo '<li> 
+                            <span class="nav-link witaj">Witaj ' . $_SESSION['username'] . '</span>
+                          </li>';
                 }
                 ?>
                 </li>

@@ -25,7 +25,6 @@ comboBox.addEventListener("input", ()=>{
     xmlhttp.open("GET", "queries/calc_delivery.php?id=" + comboBox.value, true);
     xmlhttp.send();
 })
-
 if(comboBox.value == "3")
     {
         street.classList.add("hidden");
@@ -33,8 +32,6 @@ if(comboBox.value == "3")
     } else {
         street.classList.remove("hidden");
         number.classList.remove("hidden");
-        street.required = true;
-        number.required = true;
     }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
